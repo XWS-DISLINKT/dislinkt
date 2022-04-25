@@ -1,0 +1,3 @@
+[submodule "client-web-app"]
+	path = client-web-app
+	url = https://github.com/XWS-DISLINKT/client-web-app
