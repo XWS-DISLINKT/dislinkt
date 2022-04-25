@@ -1,3 +1,15 @@
 [submodule "client-web-app"]
 	path = client-web-app
 	url = https://github.com/XWS-DISLINKT/client-web-app
+[submodule "api-gateway"]
+	path = api-gateway
+	url = https://github.com/XWS-DISLINKT/api-gateway
+[submodule "authentication-service"]
+	path = authentication-service
+	url = https://github.com/XWS-DISLINKT/authentication-service
+[submodule "post-service"]
+	path = post-service
+	url = https://github.com/XWS-DISLINKT/post-service
+[submodule "profile-service"]
+	path = profile-service
+	url = https://github.com/XWS-DISLINKT/profile-service
