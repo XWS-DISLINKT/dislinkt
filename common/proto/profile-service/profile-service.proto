@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option go_package = "github.com/XWS-DISLINKT/dislinkt/common/profile";
+
+package profile;
+
+import "google/api/annotations.proto";
+
+service ProfileService{
+  rpc Get(GetRequest) returns(GetResponse) {
+    option (google.api.http) = {
+      get: "/profile/{id}"
+    };
+  }
+  rpc GetAll(GetAllRequest) returns(GetAllResponse) {
+    option (google.api.http) = {
+      get: "/profile"
+    };
+  }
+}
+
+message GetRequest {
+  string id = 1;
+}
+
+message GetResponse {
+  Profile profile = 1;
+}
+
+message GetAllRequest {
+}
+
+message GetAllResponse {
+  repeated Profile profiles = 1;
+}
+
+message Profile {
+  string id = 1;
+  string name = 2;
+  string lastName = 3;
+  string username = 4;
+  string password = 5;
+}
