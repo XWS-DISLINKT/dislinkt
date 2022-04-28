@@ -17,6 +17,22 @@ services:
     networks:
       - network
 
+  post-service:
+    image: post-service
+    container_name: post-service
+    build:
+      context: .
+      dockerfile: ./post-service/Dockerfile
+    restart: on-failure
+    environment:
+      POST_DB_HOST: ${POST_DB_HOST}
+      POST_DB_PORT: ${POST_DB_PORT}
+      POST_SERVICE_PORT: ${POST_SERVICE_PORT}
+    depends_on:
+      - post-db
+    networks:
+      - network
+
   api-gateway:
     image: api-gateway
     container_name: api-gateway
@@ -30,12 +46,21 @@ services:
       GATEWAY_PORT: ${GATEWAY_PORT}
       PROFILE_SERVICE_HOST: ${PROFILE_SERVICE_HOST}
       PROFILE_SERVICE_PORT: ${PROFILE_SERVICE_PORT}
+      POST_SERVICE_HOST: ${POST_SERVICE_HOST}
+      POST_SERVICE_PORT: ${POST_SERVICE_PORT}
     networks:
       - network
 
   profile-db:
     image: mongo
     container_name: profile-db
+    restart: on-failure
+    networks:
+      - network
+
+  post-db:
+    image: mongo
+    container_name: post-db
     restart: on-failure
     networks:
       - network
