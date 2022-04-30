@@ -17,6 +17,17 @@ service PostService{
       get: "/post"
     };
   }
+  rpc Post(PostRequest) returns(PostResponse) {
+    option (google.api.http) = {
+      post: "/post"
+    };
+  }
+}
+
+message Post {
+  string id = 1;
+  string userId = 2;
+  string text = 3;
 }
 
 message GetRequest {
@@ -34,8 +45,11 @@ message GetAllResponse {
   repeated Post posts = 1;
 }
 
-message Post {
-  string id = 1;
-  string userId = 2;
-  string text = 3;
+message PostRequest {
+  Post post = 1;
 }
+
+message PostResponse {
+  Post post = 1;
+}
+
