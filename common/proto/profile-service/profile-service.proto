@@ -95,24 +95,6 @@ message Profile {
   repeated string interests = 15;
 }
 
-message Interest {
-  enum Interest {
-    ObjectOrientedProgramming = 0;
-    WebProgramming = 1;
-    ArtificialIntelligence = 2;
-    DataScience = 3;
-  }
-}
-
-message Skill {
-  enum Skill {
-    Java = 0;
-    C = 1;
-    Python = 2;
-    JavaScript = 3;
-  }
-}
-
 message Education {
   string id = 1;
   string school = 2;
