@@ -30,6 +30,11 @@ service ProfileService{
       body: "profile"
     };
   }
+  rpc GetByName(GetByNameRequest) returns(GetAllResponse) {
+    option (google.api.http) = {
+      get: "/profile/{name}"
+    };
+  }
 }
 
 message GetRequest {
@@ -64,12 +69,17 @@ message UpdateProfileResponse {
   Profile profile = 1;
 }
 
+message GetByNameRequest {
+  string name = 1;
+}
+
 message NewProfile {
   string id = 1;
   string name = 2;
   string lastName = 3;
   string email = 4;
   string password = 5;
+  bool   isPrivate = 6;
 }
 
 message Profile {
@@ -93,6 +103,7 @@ message Profile {
   repeated Education education = 13;
   repeated string skills = 14;
   repeated string interests = 15;
+  bool isPrivate = 16;
 }
 
 message Education {
