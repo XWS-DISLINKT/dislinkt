@@ -4,6 +4,7 @@ option go_package = "github.com/XWS-DISLINKT/dislinkt/common/profile";
 
 package profile;
 
+import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
 
 service ProfileService{
@@ -15,6 +16,18 @@ service ProfileService{
   rpc GetAll(GetAllRequest) returns(GetAllResponse) {
     option (google.api.http) = {
       get: "/profile"
+    };
+  }
+  rpc Create(CreateProfileRequest) returns(CreateProfileResponse) {
+    option (google.api.http) = {
+      post: "/profile"
+      body: "profile"
+    };
+  }
+  rpc Update(UpdateProfileRequest) returns(UpdateProfileResponse) {
+    option (google.api.http) = {
+      put: "/profile/{id}"
+      body: "profile"
     };
   }
 }
@@ -34,10 +47,66 @@ message GetAllResponse {
   repeated Profile profiles = 1;
 }
 
+message CreateProfileRequest {
+  NewProfile profile = 1;
+}
+
+message CreateProfileResponse {
+  Profile profile = 1;
+}
+
+message UpdateProfileRequest {
+  string id = 1;
+  Profile profile = 2;
+}
+
+message UpdateProfileResponse {
+  Profile profile = 1;
+}
+
+message NewProfile {
+  string id = 1;
+  string name = 2;
+  string lastName = 3;
+  string email = 4;
+  string password = 5;
+}
+
 message Profile {
   string id = 1;
   string name = 2;
   string lastName = 3;
   string username = 4;
   string password = 5;
+  string email = 6;
+  google.protobuf.Timestamp dateOfBirth = 7;
+  string phoneNumber = 8;
+  enum Gender {
+    Male = 0;
+    Female = 1;
+    Other = 2;
+  }
+  Gender gender = 9;
+  string biography = 10;
+  string headline = 11;
+  repeated Experience experience = 12;
+  repeated Education education = 13;
+  repeated string skills = 14;
+  repeated string interests = 15;
+}
+
+message Education {
+  string id = 1;
+  string school = 2;
+  string fieldOfStudy = 3;
+  string degree = 4;
+}
+
+message Experience {
+  string id = 1;
+  string jobTitle = 2;
+  string companyName = 3;
+  string description = 4;
+  google.protobuf.Timestamp startDate = 6;
+  google.protobuf.Timestamp endDate = 7;
 }
