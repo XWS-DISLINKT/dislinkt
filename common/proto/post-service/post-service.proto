@@ -20,6 +20,7 @@ service PostService{
   rpc Post(PostRequest) returns(PostResponse) {
     option (google.api.http) = {
       post: "/post"
+      body: "post"
     };
   }
 }
@@ -28,6 +29,8 @@ message Post {
   string id = 1;
   string userId = 2;
   string text = 3;
+  bytes picture = 4;
+  repeated string links = 5;
 }
 
 message GetRequest {
