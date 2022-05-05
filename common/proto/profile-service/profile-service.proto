@@ -88,10 +88,10 @@ message GetCredentialsResponse {
 }
 
 message NewProfile {
-  string id = 1;
-  string name = 2;
-  string lastName = 3;
-  string email = 4;
+  string name = 1;
+  string lastName = 2;
+  string email = 3;
+  string username = 4;
   string password = 5;
   bool   isPrivate = 6;
 }
