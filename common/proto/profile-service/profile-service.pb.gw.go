@@ -416,7 +416,7 @@ func RegisterProfileServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/profile.ProfileService/GetByName", runtime.WithHTTPPathPattern("/profile/{name}"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/profile.ProfileService/GetByName", runtime.WithHTTPPathPattern("/profile/search/{name}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -587,7 +587,7 @@ func RegisterProfileServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/profile.ProfileService/GetByName", runtime.WithHTTPPathPattern("/profile/{name}"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/profile.ProfileService/GetByName", runtime.WithHTTPPathPattern("/profile/search/{name}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -636,7 +636,7 @@ var (
 
 	pattern_ProfileService_Update_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"profile", "id"}, ""))
 
-	pattern_ProfileService_GetByName_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"profile", "name"}, ""))
+	pattern_ProfileService_GetByName_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"profile", "search", "name"}, ""))
 
 	pattern_ProfileService_GetCredentials_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"profile", "credentials", "username"}, ""))
 )

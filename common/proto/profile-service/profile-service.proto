@@ -32,7 +32,7 @@ service ProfileService{
   }
   rpc GetByName(GetByNameRequest) returns(GetAllResponse) {
     option (google.api.http) = {
-      get: "/profile/{name}"
+      get: "/profile/search/{name}"
     };
   }
   rpc GetCredentials(GetCredentialsRequest) returns(GetCredentialsResponse) {
