@@ -27,6 +27,7 @@ type ProfileServiceClient interface {
 	Create(ctx context.Context, in *CreateProfileRequest, opts ...grpc.CallOption) (*CreateProfileResponse, error)
 	Update(ctx context.Context, in *UpdateProfileRequest, opts ...grpc.CallOption) (*UpdateProfileResponse, error)
 	GetByName(ctx context.Context, in *GetByNameRequest, opts ...grpc.CallOption) (*GetAllResponse, error)
+	GetCredentials(ctx context.Context, in *GetCredentialsRequest, opts ...grpc.CallOption) (*GetCredentialsResponse, error)
 }
 
 type profileServiceClient struct {
@@ -82,6 +83,15 @@ func (c *profileServiceClient) GetByName(ctx context.Context, in *GetByNameReque
 	return out, nil
 }
 
+func (c *profileServiceClient) GetCredentials(ctx context.Context, in *GetCredentialsRequest, opts ...grpc.CallOption) (*GetCredentialsResponse, error) {
+	out := new(GetCredentialsResponse)
+	err := c.cc.Invoke(ctx, "/profile.ProfileService/GetCredentials", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProfileServiceServer is the server API for ProfileService service.
 // All implementations must embed UnimplementedProfileServiceServer
 // for forward compatibility
@@ -91,6 +101,7 @@ type ProfileServiceServer interface {
 	Create(context.Context, *CreateProfileRequest) (*CreateProfileResponse, error)
 	Update(context.Context, *UpdateProfileRequest) (*UpdateProfileResponse, error)
 	GetByName(context.Context, *GetByNameRequest) (*GetAllResponse, error)
+	GetCredentials(context.Context, *GetCredentialsRequest) (*GetCredentialsResponse, error)
 	mustEmbedUnimplementedProfileServiceServer()
 }
 
@@ -112,6 +123,9 @@ func (UnimplementedProfileServiceServer) Update(context.Context, *UpdateProfileR
 }
 func (UnimplementedProfileServiceServer) GetByName(context.Context, *GetByNameRequest) (*GetAllResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetByName not implemented")
+}
+func (UnimplementedProfileServiceServer) GetCredentials(context.Context, *GetCredentialsRequest) (*GetCredentialsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCredentials not implemented")
 }
 func (UnimplementedProfileServiceServer) mustEmbedUnimplementedProfileServiceServer() {}
 
@@ -216,6 +230,24 @@ func _ProfileService_GetByName_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProfileService_GetCredentials_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCredentialsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServiceServer).GetCredentials(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/profile.ProfileService/GetCredentials",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServiceServer).GetCredentials(ctx, req.(*GetCredentialsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProfileService_ServiceDesc is the grpc.ServiceDesc for ProfileService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -242,6 +274,10 @@ var ProfileService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetByName",
 			Handler:    _ProfileService_GetByName_Handler,
+		},
+		{
+			MethodName: "GetCredentials",
+			Handler:    _ProfileService_GetCredentials_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

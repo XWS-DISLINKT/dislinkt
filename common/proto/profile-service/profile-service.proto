@@ -35,6 +35,11 @@ service ProfileService{
       get: "/profile/{name}"
     };
   }
+  rpc GetCredentials(GetCredentialsRequest) returns(GetCredentialsResponse) {
+    option (google.api.http) = {
+      get: "/profile/credentials/{username}"
+    };
+  }
 }
 
 message GetRequest {
@@ -71,6 +76,15 @@ message UpdateProfileResponse {
 
 message GetByNameRequest {
   string name = 1;
+}
+
+message GetCredentialsRequest {
+  string username = 1;
+}
+
+message GetCredentialsResponse {
+  string username = 1;
+  string password = 2;
 }
 
 message NewProfile {
