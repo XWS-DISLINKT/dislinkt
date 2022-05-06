@@ -15,4 +15,4 @@
 	url = https://github.com/XWS-DISLINKT/profile-service
 [submodule "connection-service"]
 	path = connection-service
-	url = https:/www.github.com/XWS-DISLINKT/connection-service
+	url = https:/www.github.com/XWS-DISLINKT/connection-service
