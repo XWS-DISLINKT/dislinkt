@@ -46,6 +46,16 @@ service PostService{
       body: "comment"
     };
   }
+  rpc GetAllReactionsByPost(GetRequest) returns(AllReactionsResponse) {
+    option (google.api.http) = {
+      get: "/post/{id}/reaction"
+    };
+  }
+  rpc GetAllCommentsByPost(GetRequest) returns(AllCommentsResponse) {
+    option (google.api.http) = {
+      get: "/post/{id}/comment"
+    };
+  }
 }
 
 message Post {
@@ -107,5 +117,13 @@ message CommentRequest {
 
 message CommentResponse {
   Comment comment = 1;
+}
+
+message AllReactionsResponse {
+  repeated PostReaction reactions = 1;
+}
+
+message AllCommentsResponse {
+  repeated Comment comments = 1;
 }
 
