@@ -85,6 +85,7 @@ message GetCredentialsRequest {
 message GetCredentialsResponse {
   string username = 1;
   string password = 2;
+  string id = 3;
 }
 
 message NewProfile {
