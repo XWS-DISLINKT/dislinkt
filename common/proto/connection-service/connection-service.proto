@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option go_package = "github.com/XWS-DISLINKT/dislinkt/common/connection";
+
+package connection;
+
+service ConnectionService {
+
+}
