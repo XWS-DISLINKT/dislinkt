@@ -23,6 +23,23 @@ service PostService{
       body: "post"
     };
   }
+  rpc GetByUser(GetRequest) returns(GetAllResponse) {
+    option (google.api.http) = {
+      get: "/post/user/{id}"
+    };
+  }
+  rpc LikePost(ReactionRequest) returns(ReactionResponse) {
+    option (google.api.http) = {
+      post: "/post/like"
+      body: "reaction"
+    };
+  }
+  rpc DislikePost(ReactionRequest) returns(ReactionResponse) {
+    option (google.api.http) = {
+      post: "/post/dislike"
+      body: "reaction"
+    };
+  }
 }
 
 message Post {
@@ -31,6 +48,13 @@ message Post {
   string text = 3;
   bytes picture = 4;
   repeated string links = 5;
+}
+
+message PostReaction {
+  string id = 1;
+  string postId = 2;
+  string userId = 3;
+  string reaction = 4;
 }
 
 message GetRequest {
@@ -54,5 +78,13 @@ message PostRequest {
 
 message PostResponse {
   Post post = 1;
+}
+
+message ReactionRequest {
+   PostReaction reaction = 1;
+}
+
+message ReactionResponse {
+  PostReaction postReaction = 1;
 }
 
