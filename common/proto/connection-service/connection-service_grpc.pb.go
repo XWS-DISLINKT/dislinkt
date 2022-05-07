@@ -23,6 +23,8 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ConnectionServiceClient interface {
 	MakeConnectionWithPublicProfile(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (*ConnectionResponse, error)
+	MakeConnectionRequest(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (*ConnectionResponse, error)
+	ApproveConnectionRequest(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (*ConnectionResponse, error)
 }
 
 type connectionServiceClient struct {
@@ -42,11 +44,31 @@ func (c *connectionServiceClient) MakeConnectionWithPublicProfile(ctx context.Co
 	return out, nil
 }
 
+func (c *connectionServiceClient) MakeConnectionRequest(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (*ConnectionResponse, error) {
+	out := new(ConnectionResponse)
+	err := c.cc.Invoke(ctx, "/connection.ConnectionService/MakeConnectionRequest", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectionServiceClient) ApproveConnectionRequest(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (*ConnectionResponse, error) {
+	out := new(ConnectionResponse)
+	err := c.cc.Invoke(ctx, "/connection.ConnectionService/ApproveConnectionRequest", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ConnectionServiceServer is the server API for ConnectionService service.
 // All implementations must embed UnimplementedConnectionServiceServer
 // for forward compatibility
 type ConnectionServiceServer interface {
 	MakeConnectionWithPublicProfile(context.Context, *ConnectionRequest) (*ConnectionResponse, error)
+	MakeConnectionRequest(context.Context, *ConnectionRequest) (*ConnectionResponse, error)
+	ApproveConnectionRequest(context.Context, *ConnectionRequest) (*ConnectionResponse, error)
 	mustEmbedUnimplementedConnectionServiceServer()
 }
 
@@ -56,6 +78,12 @@ type UnimplementedConnectionServiceServer struct {
 
 func (UnimplementedConnectionServiceServer) MakeConnectionWithPublicProfile(context.Context, *ConnectionRequest) (*ConnectionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MakeConnectionWithPublicProfile not implemented")
+}
+func (UnimplementedConnectionServiceServer) MakeConnectionRequest(context.Context, *ConnectionRequest) (*ConnectionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MakeConnectionRequest not implemented")
+}
+func (UnimplementedConnectionServiceServer) ApproveConnectionRequest(context.Context, *ConnectionRequest) (*ConnectionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ApproveConnectionRequest not implemented")
 }
 func (UnimplementedConnectionServiceServer) mustEmbedUnimplementedConnectionServiceServer() {}
 
@@ -88,6 +116,42 @@ func _ConnectionService_MakeConnectionWithPublicProfile_Handler(srv interface{},
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConnectionService_MakeConnectionRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConnectionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectionServiceServer).MakeConnectionRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/connection.ConnectionService/MakeConnectionRequest",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectionServiceServer).MakeConnectionRequest(ctx, req.(*ConnectionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectionService_ApproveConnectionRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConnectionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectionServiceServer).ApproveConnectionRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/connection.ConnectionService/ApproveConnectionRequest",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectionServiceServer).ApproveConnectionRequest(ctx, req.(*ConnectionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ConnectionService_ServiceDesc is the grpc.ServiceDesc for ConnectionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -98,6 +162,14 @@ var ConnectionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MakeConnectionWithPublicProfile",
 			Handler:    _ConnectionService_MakeConnectionWithPublicProfile_Handler,
+		},
+		{
+			MethodName: "MakeConnectionRequest",
+			Handler:    _ConnectionService_MakeConnectionRequest_Handler,
+		},
+		{
+			MethodName: "ApproveConnectionRequest",
+			Handler:    _ConnectionService_ApproveConnectionRequest_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

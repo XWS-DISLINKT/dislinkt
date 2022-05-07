@@ -14,6 +14,20 @@ service ConnectionService {
     };
   }
 
+  rpc MakeConnectionRequest(ConnectionRequest) returns(ConnectionResponse) {
+    option (google.api.http) = {
+      post: "/connection/request"
+      body: "connectionBody"
+    };
+  }
+
+  rpc ApproveConnectionRequest(ConnectionRequest) returns(ConnectionResponse) {
+    option (google.api.http) = {
+      put: "/connection/request"
+      body: "connectionBody"
+    };
+  }
+
 }
 
 message ConnectionRequest {
@@ -21,7 +35,7 @@ message ConnectionRequest {
 }
 
 message ConnectionResponse {
-  string success = 1;
+  bool success = 1;
 }
 
 message ConnectionBody {
