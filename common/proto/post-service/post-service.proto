@@ -40,6 +40,12 @@ service PostService{
       body: "reaction"
     };
   }
+  rpc CommentPost(CommentRequest) returns(CommentResponse) {
+    option (google.api.http) = {
+      post: "/post/comment"
+      body: "comment"
+    };
+  }
 }
 
 message Post {
@@ -55,6 +61,13 @@ message PostReaction {
   string postId = 2;
   string userId = 3;
   string reaction = 4;
+}
+
+message Comment {
+  string id = 1;
+  string postId = 2;
+  string userId = 3;
+  string text = 4;
 }
 
 message GetRequest {
@@ -86,5 +99,13 @@ message ReactionRequest {
 
 message ReactionResponse {
   PostReaction postReaction = 1;
+}
+
+message CommentRequest {
+  Comment comment = 1;
+}
+
+message CommentResponse {
+  Comment comment = 1;
 }
 
