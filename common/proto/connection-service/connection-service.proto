@@ -4,6 +4,27 @@ option go_package = "github.com/XWS-DISLINKT/dislinkt/common/connection";
 
 package connection;
 
-service ConnectionService {
+import "google/api/annotations.proto";
 
+service ConnectionService {
+  rpc MakeConnectionWithPublicProfile(ConnectionRequest) returns(ConnectionResponse) {
+    option (google.api.http) = {
+      post: "/connection"
+      body: "connectionBody"
+    };
+  }
+
+}
+
+message ConnectionRequest {
+  ConnectionBody connectionBody = 1;
+}
+
+message ConnectionResponse {
+  string success = 1;
+}
+
+message ConnectionBody {
+  string requestSenderId = 1;
+  string requestReceiverId = 2;
 }
