@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -22,10 +23,10 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProfileServiceClient interface {
-	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error)
-	GetAll(ctx context.Context, in *GetAllRequest, opts ...grpc.CallOption) (*GetAllResponse, error)
-	Create(ctx context.Context, in *CreateProfileRequest, opts ...grpc.CallOption) (*CreateProfileResponse, error)
-	Update(ctx context.Context, in *UpdateProfileRequest, opts ...grpc.CallOption) (*UpdateProfileResponse, error)
+	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*Profile, error)
+	GetAll(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAllResponse, error)
+	Create(ctx context.Context, in *NewProfile, opts ...grpc.CallOption) (*Profile, error)
+	Update(ctx context.Context, in *Profile, opts ...grpc.CallOption) (*Profile, error)
 	GetByName(ctx context.Context, in *GetByNameRequest, opts ...grpc.CallOption) (*GetAllResponse, error)
 	GetCredentials(ctx context.Context, in *GetCredentialsRequest, opts ...grpc.CallOption) (*GetCredentialsResponse, error)
 }
@@ -38,8 +39,8 @@ func NewProfileServiceClient(cc grpc.ClientConnInterface) ProfileServiceClient {
 	return &profileServiceClient{cc}
 }
 
-func (c *profileServiceClient) Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error) {
-	out := new(GetResponse)
+func (c *profileServiceClient) Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*Profile, error) {
+	out := new(Profile)
 	err := c.cc.Invoke(ctx, "/profile.ProfileService/Get", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -47,7 +48,7 @@ func (c *profileServiceClient) Get(ctx context.Context, in *GetRequest, opts ...
 	return out, nil
 }
 
-func (c *profileServiceClient) GetAll(ctx context.Context, in *GetAllRequest, opts ...grpc.CallOption) (*GetAllResponse, error) {
+func (c *profileServiceClient) GetAll(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAllResponse, error) {
 	out := new(GetAllResponse)
 	err := c.cc.Invoke(ctx, "/profile.ProfileService/GetAll", in, out, opts...)
 	if err != nil {
@@ -56,8 +57,8 @@ func (c *profileServiceClient) GetAll(ctx context.Context, in *GetAllRequest, op
 	return out, nil
 }
 
-func (c *profileServiceClient) Create(ctx context.Context, in *CreateProfileRequest, opts ...grpc.CallOption) (*CreateProfileResponse, error) {
-	out := new(CreateProfileResponse)
+func (c *profileServiceClient) Create(ctx context.Context, in *NewProfile, opts ...grpc.CallOption) (*Profile, error) {
+	out := new(Profile)
 	err := c.cc.Invoke(ctx, "/profile.ProfileService/Create", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -65,8 +66,8 @@ func (c *profileServiceClient) Create(ctx context.Context, in *CreateProfileRequ
 	return out, nil
 }
 
-func (c *profileServiceClient) Update(ctx context.Context, in *UpdateProfileRequest, opts ...grpc.CallOption) (*UpdateProfileResponse, error) {
-	out := new(UpdateProfileResponse)
+func (c *profileServiceClient) Update(ctx context.Context, in *Profile, opts ...grpc.CallOption) (*Profile, error) {
+	out := new(Profile)
 	err := c.cc.Invoke(ctx, "/profile.ProfileService/Update", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -96,10 +97,10 @@ func (c *profileServiceClient) GetCredentials(ctx context.Context, in *GetCreden
 // All implementations must embed UnimplementedProfileServiceServer
 // for forward compatibility
 type ProfileServiceServer interface {
-	Get(context.Context, *GetRequest) (*GetResponse, error)
-	GetAll(context.Context, *GetAllRequest) (*GetAllResponse, error)
-	Create(context.Context, *CreateProfileRequest) (*CreateProfileResponse, error)
-	Update(context.Context, *UpdateProfileRequest) (*UpdateProfileResponse, error)
+	Get(context.Context, *GetRequest) (*Profile, error)
+	GetAll(context.Context, *emptypb.Empty) (*GetAllResponse, error)
+	Create(context.Context, *NewProfile) (*Profile, error)
+	Update(context.Context, *Profile) (*Profile, error)
 	GetByName(context.Context, *GetByNameRequest) (*GetAllResponse, error)
 	GetCredentials(context.Context, *GetCredentialsRequest) (*GetCredentialsResponse, error)
 	mustEmbedUnimplementedProfileServiceServer()
@@ -109,16 +110,16 @@ type ProfileServiceServer interface {
 type UnimplementedProfileServiceServer struct {
 }
 
-func (UnimplementedProfileServiceServer) Get(context.Context, *GetRequest) (*GetResponse, error) {
+func (UnimplementedProfileServiceServer) Get(context.Context, *GetRequest) (*Profile, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedProfileServiceServer) GetAll(context.Context, *GetAllRequest) (*GetAllResponse, error) {
+func (UnimplementedProfileServiceServer) GetAll(context.Context, *emptypb.Empty) (*GetAllResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAll not implemented")
 }
-func (UnimplementedProfileServiceServer) Create(context.Context, *CreateProfileRequest) (*CreateProfileResponse, error) {
+func (UnimplementedProfileServiceServer) Create(context.Context, *NewProfile) (*Profile, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedProfileServiceServer) Update(context.Context, *UpdateProfileRequest) (*UpdateProfileResponse, error) {
+func (UnimplementedProfileServiceServer) Update(context.Context, *Profile) (*Profile, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
 func (UnimplementedProfileServiceServer) GetByName(context.Context, *GetByNameRequest) (*GetAllResponse, error) {
@@ -159,7 +160,7 @@ func _ProfileService_Get_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _ProfileService_GetAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAllRequest)
+	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -171,13 +172,13 @@ func _ProfileService_GetAll_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: "/profile.ProfileService/GetAll",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProfileServiceServer).GetAll(ctx, req.(*GetAllRequest))
+		return srv.(ProfileServiceServer).GetAll(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProfileService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateProfileRequest)
+	in := new(NewProfile)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -189,13 +190,13 @@ func _ProfileService_Create_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: "/profile.ProfileService/Create",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProfileServiceServer).Create(ctx, req.(*CreateProfileRequest))
+		return srv.(ProfileServiceServer).Create(ctx, req.(*NewProfile))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProfileService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateProfileRequest)
+	in := new(Profile)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -207,7 +208,7 @@ func _ProfileService_Update_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: "/profile.ProfileService/Update",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProfileServiceServer).Update(ctx, req.(*UpdateProfileRequest))
+		return srv.(ProfileServiceServer).Update(ctx, req.(*Profile))
 	}
 	return interceptor(ctx, in, info, handler)
 }

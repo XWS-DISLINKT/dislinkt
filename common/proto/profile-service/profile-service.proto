@@ -6,28 +6,29 @@ package profile;
 
 import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
 
 service ProfileService{
-  rpc Get(GetRequest) returns(GetResponse) {
+  rpc Get(GetRequest) returns(Profile) {
     option (google.api.http) = {
       get: "/profile/{id}"
     };
   }
-  rpc GetAll(GetAllRequest) returns(GetAllResponse) {
+  rpc GetAll(google.protobuf.Empty) returns(GetAllResponse) {
     option (google.api.http) = {
       get: "/profile"
     };
   }
-  rpc Create(CreateProfileRequest) returns(CreateProfileResponse) {
+  rpc Create(NewProfile) returns(Profile) {
     option (google.api.http) = {
       post: "/profile"
-      body: "profile"
+      body: "*"
     };
   }
-  rpc Update(UpdateProfileRequest) returns(UpdateProfileResponse) {
+  rpc Update(Profile) returns(Profile) {
     option (google.api.http) = {
       put: "/profile/{id}"
-      body: "profile"
+      body: "*"
     };
   }
   rpc GetByName(GetByNameRequest) returns(GetAllResponse) {
@@ -46,32 +47,11 @@ message GetRequest {
   string id = 1;
 }
 
-message GetResponse {
-  Profile profile = 1;
-}
-
 message GetAllRequest {
 }
 
 message GetAllResponse {
   repeated Profile profiles = 1;
-}
-
-message CreateProfileRequest {
-  NewProfile profile = 1;
-}
-
-message CreateProfileResponse {
-  Profile profile = 1;
-}
-
-message UpdateProfileRequest {
-  string id = 1;
-  Profile profile = 2;
-}
-
-message UpdateProfileResponse {
-  Profile profile = 1;
 }
 
 message GetByNameRequest {

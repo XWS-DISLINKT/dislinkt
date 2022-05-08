@@ -56,6 +56,11 @@ service PostService{
       get: "/post/{id}/comment"
     };
   }
+  rpc GetFeed(GetRequest) returns(GetAllResponse) {
+    option (google.api.http) = {
+      get: "/post/feed/{id}"
+    };
+  }
 }
 
 message Post {
