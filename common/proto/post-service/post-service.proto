@@ -67,7 +67,7 @@ message Post {
   string id = 1;
   string userId = 2;
   string text = 3;
-  bytes picture = 4;
+  string picture = 4;
   repeated string links = 5;
 }
 
