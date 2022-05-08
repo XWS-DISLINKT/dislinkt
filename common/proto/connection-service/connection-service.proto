@@ -28,6 +28,18 @@ service ConnectionService {
     };
   }
 
+  rpc GetConnectionsUsernamesFor(GetConnectionsUsernamesRequest) returns(GetConnectionsUsernamesResponse) {
+    option (google.api.http) = {
+      get: "/connection/usernames/{id}"
+    };
+  }
+
+  rpc GetRequestsUsernamesFor(GetConnectionsUsernamesRequest) returns(GetConnectionsUsernamesResponse) {
+    option (google.api.http) = {
+      get: "/connection/requests/{id}"
+    };
+  }
+
 }
 
 message ConnectionRequest {
@@ -41,4 +53,12 @@ message ConnectionResponse {
 message ConnectionBody {
   string requestSenderId = 1;
   string requestReceiverId = 2;
+}
+
+message GetConnectionsUsernamesRequest {
+  string id = 1;
+}
+
+message GetConnectionsUsernamesResponse {
+  repeated string usernames = 1;
 }

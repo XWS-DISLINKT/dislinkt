@@ -25,6 +25,8 @@ type ConnectionServiceClient interface {
 	MakeConnectionWithPublicProfile(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (*ConnectionResponse, error)
 	MakeConnectionRequest(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (*ConnectionResponse, error)
 	ApproveConnectionRequest(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (*ConnectionResponse, error)
+	GetConnectionsUsernamesFor(ctx context.Context, in *GetConnectionsUsernamesRequest, opts ...grpc.CallOption) (*GetConnectionsUsernamesResponse, error)
+	GetRequestsUsernamesFor(ctx context.Context, in *GetConnectionsUsernamesRequest, opts ...grpc.CallOption) (*GetConnectionsUsernamesResponse, error)
 }
 
 type connectionServiceClient struct {
@@ -62,6 +64,24 @@ func (c *connectionServiceClient) ApproveConnectionRequest(ctx context.Context, 
 	return out, nil
 }
 
+func (c *connectionServiceClient) GetConnectionsUsernamesFor(ctx context.Context, in *GetConnectionsUsernamesRequest, opts ...grpc.CallOption) (*GetConnectionsUsernamesResponse, error) {
+	out := new(GetConnectionsUsernamesResponse)
+	err := c.cc.Invoke(ctx, "/connection.ConnectionService/GetConnectionsUsernamesFor", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectionServiceClient) GetRequestsUsernamesFor(ctx context.Context, in *GetConnectionsUsernamesRequest, opts ...grpc.CallOption) (*GetConnectionsUsernamesResponse, error) {
+	out := new(GetConnectionsUsernamesResponse)
+	err := c.cc.Invoke(ctx, "/connection.ConnectionService/GetRequestsUsernamesFor", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ConnectionServiceServer is the server API for ConnectionService service.
 // All implementations must embed UnimplementedConnectionServiceServer
 // for forward compatibility
@@ -69,6 +89,8 @@ type ConnectionServiceServer interface {
 	MakeConnectionWithPublicProfile(context.Context, *ConnectionRequest) (*ConnectionResponse, error)
 	MakeConnectionRequest(context.Context, *ConnectionRequest) (*ConnectionResponse, error)
 	ApproveConnectionRequest(context.Context, *ConnectionRequest) (*ConnectionResponse, error)
+	GetConnectionsUsernamesFor(context.Context, *GetConnectionsUsernamesRequest) (*GetConnectionsUsernamesResponse, error)
+	GetRequestsUsernamesFor(context.Context, *GetConnectionsUsernamesRequest) (*GetConnectionsUsernamesResponse, error)
 	mustEmbedUnimplementedConnectionServiceServer()
 }
 
@@ -84,6 +106,12 @@ func (UnimplementedConnectionServiceServer) MakeConnectionRequest(context.Contex
 }
 func (UnimplementedConnectionServiceServer) ApproveConnectionRequest(context.Context, *ConnectionRequest) (*ConnectionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ApproveConnectionRequest not implemented")
+}
+func (UnimplementedConnectionServiceServer) GetConnectionsUsernamesFor(context.Context, *GetConnectionsUsernamesRequest) (*GetConnectionsUsernamesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetConnectionsUsernamesFor not implemented")
+}
+func (UnimplementedConnectionServiceServer) GetRequestsUsernamesFor(context.Context, *GetConnectionsUsernamesRequest) (*GetConnectionsUsernamesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRequestsUsernamesFor not implemented")
 }
 func (UnimplementedConnectionServiceServer) mustEmbedUnimplementedConnectionServiceServer() {}
 
@@ -152,6 +180,42 @@ func _ConnectionService_ApproveConnectionRequest_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConnectionService_GetConnectionsUsernamesFor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConnectionsUsernamesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectionServiceServer).GetConnectionsUsernamesFor(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/connection.ConnectionService/GetConnectionsUsernamesFor",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectionServiceServer).GetConnectionsUsernamesFor(ctx, req.(*GetConnectionsUsernamesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectionService_GetRequestsUsernamesFor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConnectionsUsernamesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectionServiceServer).GetRequestsUsernamesFor(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/connection.ConnectionService/GetRequestsUsernamesFor",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectionServiceServer).GetRequestsUsernamesFor(ctx, req.(*GetConnectionsUsernamesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ConnectionService_ServiceDesc is the grpc.ServiceDesc for ConnectionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -170,6 +234,14 @@ var ConnectionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ApproveConnectionRequest",
 			Handler:    _ConnectionService_ApproveConnectionRequest_Handler,
+		},
+		{
+			MethodName: "GetConnectionsUsernamesFor",
+			Handler:    _ConnectionService_GetConnectionsUsernamesFor_Handler,
+		},
+		{
+			MethodName: "GetRequestsUsernamesFor",
+			Handler:    _ConnectionService_GetRequestsUsernamesFor_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
