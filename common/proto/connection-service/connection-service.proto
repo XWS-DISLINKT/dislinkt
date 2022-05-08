@@ -39,7 +39,23 @@ service ConnectionService {
       get: "/connection/requests/{id}"
     };
   }
+  
+  rpc InsertUser(User) returns(Status) {
+    option (google.api.http) = {
+      post: "/connection/user"
+      body: "*"
+    };
+  }
 
+}
+
+message Status {
+  bool success = 1;
+}
+
+message User {
+  string userId = 1;
+  bool isPrivate = 2;
 }
 
 message ConnectionRequest {

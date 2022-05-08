@@ -27,6 +27,7 @@ type ConnectionServiceClient interface {
 	ApproveConnectionRequest(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (*ConnectionResponse, error)
 	GetConnectionsUsernamesFor(ctx context.Context, in *GetConnectionsUsernamesRequest, opts ...grpc.CallOption) (*GetConnectionsUsernamesResponse, error)
 	GetRequestsUsernamesFor(ctx context.Context, in *GetConnectionsUsernamesRequest, opts ...grpc.CallOption) (*GetConnectionsUsernamesResponse, error)
+	InsertUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Status, error)
 }
 
 type connectionServiceClient struct {
@@ -82,6 +83,15 @@ func (c *connectionServiceClient) GetRequestsUsernamesFor(ctx context.Context, i
 	return out, nil
 }
 
+func (c *connectionServiceClient) InsertUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Status, error) {
+	out := new(Status)
+	err := c.cc.Invoke(ctx, "/connection.ConnectionService/InsertUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ConnectionServiceServer is the server API for ConnectionService service.
 // All implementations must embed UnimplementedConnectionServiceServer
 // for forward compatibility
@@ -91,6 +101,7 @@ type ConnectionServiceServer interface {
 	ApproveConnectionRequest(context.Context, *ConnectionRequest) (*ConnectionResponse, error)
 	GetConnectionsUsernamesFor(context.Context, *GetConnectionsUsernamesRequest) (*GetConnectionsUsernamesResponse, error)
 	GetRequestsUsernamesFor(context.Context, *GetConnectionsUsernamesRequest) (*GetConnectionsUsernamesResponse, error)
+	InsertUser(context.Context, *User) (*Status, error)
 	mustEmbedUnimplementedConnectionServiceServer()
 }
 
@@ -112,6 +123,9 @@ func (UnimplementedConnectionServiceServer) GetConnectionsUsernamesFor(context.C
 }
 func (UnimplementedConnectionServiceServer) GetRequestsUsernamesFor(context.Context, *GetConnectionsUsernamesRequest) (*GetConnectionsUsernamesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRequestsUsernamesFor not implemented")
+}
+func (UnimplementedConnectionServiceServer) InsertUser(context.Context, *User) (*Status, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InsertUser not implemented")
 }
 func (UnimplementedConnectionServiceServer) mustEmbedUnimplementedConnectionServiceServer() {}
 
@@ -216,6 +230,24 @@ func _ConnectionService_GetRequestsUsernamesFor_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConnectionService_InsertUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(User)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectionServiceServer).InsertUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/connection.ConnectionService/InsertUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectionServiceServer).InsertUser(ctx, req.(*User))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ConnectionService_ServiceDesc is the grpc.ServiceDesc for ConnectionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -242,6 +274,10 @@ var ConnectionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRequestsUsernamesFor",
 			Handler:    _ConnectionService_GetRequestsUsernamesFor_Handler,
+		},
+		{
+			MethodName: "InsertUser",
+			Handler:    _ConnectionService_InsertUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
