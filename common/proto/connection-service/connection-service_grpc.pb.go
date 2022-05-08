@@ -22,9 +22,9 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ConnectionServiceClient interface {
-	MakeConnectionWithPublicProfile(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (*ConnectionResponse, error)
-	MakeConnectionRequest(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (*ConnectionResponse, error)
-	ApproveConnectionRequest(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (*ConnectionResponse, error)
+	MakeConnectionWithPublicProfile(ctx context.Context, in *ConnectionBody, opts ...grpc.CallOption) (*ConnectionResponse, error)
+	MakeConnectionRequest(ctx context.Context, in *ConnectionBody, opts ...grpc.CallOption) (*ConnectionResponse, error)
+	ApproveConnectionRequest(ctx context.Context, in *ConnectionBody, opts ...grpc.CallOption) (*ConnectionResponse, error)
 	GetConnectionsUsernamesFor(ctx context.Context, in *GetConnectionsUsernamesRequest, opts ...grpc.CallOption) (*GetConnectionsUsernamesResponse, error)
 	GetRequestsUsernamesFor(ctx context.Context, in *GetConnectionsUsernamesRequest, opts ...grpc.CallOption) (*GetConnectionsUsernamesResponse, error)
 	InsertUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Status, error)
@@ -38,7 +38,7 @@ func NewConnectionServiceClient(cc grpc.ClientConnInterface) ConnectionServiceCl
 	return &connectionServiceClient{cc}
 }
 
-func (c *connectionServiceClient) MakeConnectionWithPublicProfile(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (*ConnectionResponse, error) {
+func (c *connectionServiceClient) MakeConnectionWithPublicProfile(ctx context.Context, in *ConnectionBody, opts ...grpc.CallOption) (*ConnectionResponse, error) {
 	out := new(ConnectionResponse)
 	err := c.cc.Invoke(ctx, "/connection.ConnectionService/MakeConnectionWithPublicProfile", in, out, opts...)
 	if err != nil {
@@ -47,7 +47,7 @@ func (c *connectionServiceClient) MakeConnectionWithPublicProfile(ctx context.Co
 	return out, nil
 }
 
-func (c *connectionServiceClient) MakeConnectionRequest(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (*ConnectionResponse, error) {
+func (c *connectionServiceClient) MakeConnectionRequest(ctx context.Context, in *ConnectionBody, opts ...grpc.CallOption) (*ConnectionResponse, error) {
 	out := new(ConnectionResponse)
 	err := c.cc.Invoke(ctx, "/connection.ConnectionService/MakeConnectionRequest", in, out, opts...)
 	if err != nil {
@@ -56,7 +56,7 @@ func (c *connectionServiceClient) MakeConnectionRequest(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *connectionServiceClient) ApproveConnectionRequest(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (*ConnectionResponse, error) {
+func (c *connectionServiceClient) ApproveConnectionRequest(ctx context.Context, in *ConnectionBody, opts ...grpc.CallOption) (*ConnectionResponse, error) {
 	out := new(ConnectionResponse)
 	err := c.cc.Invoke(ctx, "/connection.ConnectionService/ApproveConnectionRequest", in, out, opts...)
 	if err != nil {
@@ -96,9 +96,9 @@ func (c *connectionServiceClient) InsertUser(ctx context.Context, in *User, opts
 // All implementations must embed UnimplementedConnectionServiceServer
 // for forward compatibility
 type ConnectionServiceServer interface {
-	MakeConnectionWithPublicProfile(context.Context, *ConnectionRequest) (*ConnectionResponse, error)
-	MakeConnectionRequest(context.Context, *ConnectionRequest) (*ConnectionResponse, error)
-	ApproveConnectionRequest(context.Context, *ConnectionRequest) (*ConnectionResponse, error)
+	MakeConnectionWithPublicProfile(context.Context, *ConnectionBody) (*ConnectionResponse, error)
+	MakeConnectionRequest(context.Context, *ConnectionBody) (*ConnectionResponse, error)
+	ApproveConnectionRequest(context.Context, *ConnectionBody) (*ConnectionResponse, error)
 	GetConnectionsUsernamesFor(context.Context, *GetConnectionsUsernamesRequest) (*GetConnectionsUsernamesResponse, error)
 	GetRequestsUsernamesFor(context.Context, *GetConnectionsUsernamesRequest) (*GetConnectionsUsernamesResponse, error)
 	InsertUser(context.Context, *User) (*Status, error)
@@ -109,13 +109,13 @@ type ConnectionServiceServer interface {
 type UnimplementedConnectionServiceServer struct {
 }
 
-func (UnimplementedConnectionServiceServer) MakeConnectionWithPublicProfile(context.Context, *ConnectionRequest) (*ConnectionResponse, error) {
+func (UnimplementedConnectionServiceServer) MakeConnectionWithPublicProfile(context.Context, *ConnectionBody) (*ConnectionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MakeConnectionWithPublicProfile not implemented")
 }
-func (UnimplementedConnectionServiceServer) MakeConnectionRequest(context.Context, *ConnectionRequest) (*ConnectionResponse, error) {
+func (UnimplementedConnectionServiceServer) MakeConnectionRequest(context.Context, *ConnectionBody) (*ConnectionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MakeConnectionRequest not implemented")
 }
-func (UnimplementedConnectionServiceServer) ApproveConnectionRequest(context.Context, *ConnectionRequest) (*ConnectionResponse, error) {
+func (UnimplementedConnectionServiceServer) ApproveConnectionRequest(context.Context, *ConnectionBody) (*ConnectionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ApproveConnectionRequest not implemented")
 }
 func (UnimplementedConnectionServiceServer) GetConnectionsUsernamesFor(context.Context, *GetConnectionsUsernamesRequest) (*GetConnectionsUsernamesResponse, error) {
@@ -141,7 +141,7 @@ func RegisterConnectionServiceServer(s grpc.ServiceRegistrar, srv ConnectionServ
 }
 
 func _ConnectionService_MakeConnectionWithPublicProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ConnectionRequest)
+	in := new(ConnectionBody)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -153,13 +153,13 @@ func _ConnectionService_MakeConnectionWithPublicProfile_Handler(srv interface{},
 		FullMethod: "/connection.ConnectionService/MakeConnectionWithPublicProfile",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConnectionServiceServer).MakeConnectionWithPublicProfile(ctx, req.(*ConnectionRequest))
+		return srv.(ConnectionServiceServer).MakeConnectionWithPublicProfile(ctx, req.(*ConnectionBody))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ConnectionService_MakeConnectionRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ConnectionRequest)
+	in := new(ConnectionBody)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -171,13 +171,13 @@ func _ConnectionService_MakeConnectionRequest_Handler(srv interface{}, ctx conte
 		FullMethod: "/connection.ConnectionService/MakeConnectionRequest",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConnectionServiceServer).MakeConnectionRequest(ctx, req.(*ConnectionRequest))
+		return srv.(ConnectionServiceServer).MakeConnectionRequest(ctx, req.(*ConnectionBody))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ConnectionService_ApproveConnectionRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ConnectionRequest)
+	in := new(ConnectionBody)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -189,7 +189,7 @@ func _ConnectionService_ApproveConnectionRequest_Handler(srv interface{}, ctx co
 		FullMethod: "/connection.ConnectionService/ApproveConnectionRequest",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConnectionServiceServer).ApproveConnectionRequest(ctx, req.(*ConnectionRequest))
+		return srv.(ConnectionServiceServer).ApproveConnectionRequest(ctx, req.(*ConnectionBody))
 	}
 	return interceptor(ctx, in, info, handler)
 }

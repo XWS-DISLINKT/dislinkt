@@ -7,24 +7,24 @@ package connection;
 import "google/api/annotations.proto";
 
 service ConnectionService {
-  rpc MakeConnectionWithPublicProfile(ConnectionRequest) returns(ConnectionResponse) {
+  rpc MakeConnectionWithPublicProfile(ConnectionBody) returns(ConnectionResponse) {
     option (google.api.http) = {
       post: "/connection"
-      body: "connectionBody"
+      body: "*"
     };
   }
 
-  rpc MakeConnectionRequest(ConnectionRequest) returns(ConnectionResponse) {
+  rpc MakeConnectionRequest(ConnectionBody) returns(ConnectionResponse) {
     option (google.api.http) = {
       post: "/connection/request"
-      body: "connectionBody"
+      body: "*"
     };
   }
 
-  rpc ApproveConnectionRequest(ConnectionRequest) returns(ConnectionResponse) {
+  rpc ApproveConnectionRequest(ConnectionBody) returns(ConnectionResponse) {
     option (google.api.http) = {
       put: "/connection/request"
-      body: "connectionBody"
+      body: "*"
     };
   }
 
