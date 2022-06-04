@@ -5,6 +5,7 @@ option go_package = "github.com/XWS-DISLINKT/dislinkt/common/post";
 package post;
 
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 
 service PostService{
   rpc Get(GetRequest) returns(GetResponse) {
@@ -61,6 +62,60 @@ service PostService{
       get: "/post/feed/{id}"
     };
   }
+  rpc PostJob(PostJobRequest) returns(Job) {
+	option (google.api.http) = {
+      post: "/post/job"
+	  body: "*"
+    };
+  }
+  rpc GetAllJobs(GetAllJobsRequest) returns(GetAllJobsResponse) {
+	option (google.api.http) = {
+      get: "/post/job"
+    };
+  }
+  rpc RegisterApiKey(GetApiKeyRequest) returns (GetApiKeyResponse) {
+	option (google.api.http) = {
+      post: "/post/job/apikey"
+	  body: "*"
+    };
+  }
+}
+
+message PostJobRequest {
+	Job job = 1;
+	string userId = 2;
+	string apiKey = 3;
+}
+message GetApiKeyRequest{
+	string userId = 1;
+}
+
+message GetApiKeyResponse{
+	string userId = 1;
+	string apiKey = 2;
+}
+
+
+message GetAllJobsRequest{
+}
+
+message GetAllJobsResponse{
+	repeated Job jobs = 1;
+}
+
+message Job {
+	string id = 1;
+	string position = 2;
+	string companyName = 3;
+	enum Seniority {
+		Junior = 0;
+		Medior = 1;
+		Senior = 2;
+	}
+	Seniority seniority = 4; 
+	string location = 5;
+	string description = 6;
+	google.protobuf.Timestamp closingDate = 7;
 }
 
 message Post {

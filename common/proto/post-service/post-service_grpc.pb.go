@@ -32,6 +32,9 @@ type PostServiceClient interface {
 	GetAllReactionsByPost(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*AllReactionsResponse, error)
 	GetAllCommentsByPost(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*AllCommentsResponse, error)
 	GetFeed(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetAllResponse, error)
+	PostJob(ctx context.Context, in *PostJobRequest, opts ...grpc.CallOption) (*Job, error)
+	GetAllJobs(ctx context.Context, in *GetAllJobsRequest, opts ...grpc.CallOption) (*GetAllJobsResponse, error)
+	RegisterApiKey(ctx context.Context, in *GetApiKeyRequest, opts ...grpc.CallOption) (*GetApiKeyResponse, error)
 }
 
 type postServiceClient struct {
@@ -132,6 +135,33 @@ func (c *postServiceClient) GetFeed(ctx context.Context, in *GetRequest, opts ..
 	return out, nil
 }
 
+func (c *postServiceClient) PostJob(ctx context.Context, in *PostJobRequest, opts ...grpc.CallOption) (*Job, error) {
+	out := new(Job)
+	err := c.cc.Invoke(ctx, "/post.PostService/PostJob", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *postServiceClient) GetAllJobs(ctx context.Context, in *GetAllJobsRequest, opts ...grpc.CallOption) (*GetAllJobsResponse, error) {
+	out := new(GetAllJobsResponse)
+	err := c.cc.Invoke(ctx, "/post.PostService/GetAllJobs", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *postServiceClient) RegisterApiKey(ctx context.Context, in *GetApiKeyRequest, opts ...grpc.CallOption) (*GetApiKeyResponse, error) {
+	out := new(GetApiKeyResponse)
+	err := c.cc.Invoke(ctx, "/post.PostService/RegisterApiKey", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PostServiceServer is the server API for PostService service.
 // All implementations must embed UnimplementedPostServiceServer
 // for forward compatibility
@@ -146,6 +176,9 @@ type PostServiceServer interface {
 	GetAllReactionsByPost(context.Context, *GetRequest) (*AllReactionsResponse, error)
 	GetAllCommentsByPost(context.Context, *GetRequest) (*AllCommentsResponse, error)
 	GetFeed(context.Context, *GetRequest) (*GetAllResponse, error)
+	PostJob(context.Context, *PostJobRequest) (*Job, error)
+	GetAllJobs(context.Context, *GetAllJobsRequest) (*GetAllJobsResponse, error)
+	RegisterApiKey(context.Context, *GetApiKeyRequest) (*GetApiKeyResponse, error)
 	mustEmbedUnimplementedPostServiceServer()
 }
 
@@ -182,6 +215,15 @@ func (UnimplementedPostServiceServer) GetAllCommentsByPost(context.Context, *Get
 }
 func (UnimplementedPostServiceServer) GetFeed(context.Context, *GetRequest) (*GetAllResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFeed not implemented")
+}
+func (UnimplementedPostServiceServer) PostJob(context.Context, *PostJobRequest) (*Job, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostJob not implemented")
+}
+func (UnimplementedPostServiceServer) GetAllJobs(context.Context, *GetAllJobsRequest) (*GetAllJobsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllJobs not implemented")
+}
+func (UnimplementedPostServiceServer) RegisterApiKey(context.Context, *GetApiKeyRequest) (*GetApiKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterApiKey not implemented")
 }
 func (UnimplementedPostServiceServer) mustEmbedUnimplementedPostServiceServer() {}
 
@@ -376,6 +418,60 @@ func _PostService_GetFeed_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PostService_PostJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostJobRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PostServiceServer).PostJob(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/post.PostService/PostJob",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PostServiceServer).PostJob(ctx, req.(*PostJobRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PostService_GetAllJobs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllJobsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PostServiceServer).GetAllJobs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/post.PostService/GetAllJobs",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PostServiceServer).GetAllJobs(ctx, req.(*GetAllJobsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PostService_RegisterApiKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetApiKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PostServiceServer).RegisterApiKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/post.PostService/RegisterApiKey",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PostServiceServer).RegisterApiKey(ctx, req.(*GetApiKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PostService_ServiceDesc is the grpc.ServiceDesc for PostService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -422,6 +518,18 @@ var PostService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetFeed",
 			Handler:    _PostService_GetFeed_Handler,
+		},
+		{
+			MethodName: "PostJob",
+			Handler:    _PostService_PostJob_Handler,
+		},
+		{
+			MethodName: "GetAllJobs",
+			Handler:    _PostService_GetAllJobs_Handler,
+		},
+		{
+			MethodName: "RegisterApiKey",
+			Handler:    _PostService_RegisterApiKey_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
