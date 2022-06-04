@@ -79,6 +79,19 @@ service PostService{
 	  body: "*"
     };
   }
+  rpc SearchJobsByPosition(SearchJobsByPositionRequest) returns(SearchJobsByPositionResponse) {
+	option (google.api.http) = {
+      get: "/post/job/{search}"
+    };
+  }
+}
+
+message SearchJobsByPositionRequest {
+	string search = 1;
+}
+
+message SearchJobsByPositionResponse {
+	repeated Job jobs = 1;
 }
 
 message PostJobRequest {
@@ -97,6 +110,7 @@ message GetApiKeyResponse{
 
 
 message GetAllJobsRequest{
+	string search = 1;
 }
 
 message GetAllJobsResponse{

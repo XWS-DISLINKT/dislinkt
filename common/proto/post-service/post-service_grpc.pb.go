@@ -35,6 +35,7 @@ type PostServiceClient interface {
 	PostJob(ctx context.Context, in *PostJobRequest, opts ...grpc.CallOption) (*Job, error)
 	GetAllJobs(ctx context.Context, in *GetAllJobsRequest, opts ...grpc.CallOption) (*GetAllJobsResponse, error)
 	RegisterApiKey(ctx context.Context, in *GetApiKeyRequest, opts ...grpc.CallOption) (*GetApiKeyResponse, error)
+	SearchJobsByPosition(ctx context.Context, in *SearchJobsByPositionRequest, opts ...grpc.CallOption) (*SearchJobsByPositionResponse, error)
 }
 
 type postServiceClient struct {
@@ -162,6 +163,15 @@ func (c *postServiceClient) RegisterApiKey(ctx context.Context, in *GetApiKeyReq
 	return out, nil
 }
 
+func (c *postServiceClient) SearchJobsByPosition(ctx context.Context, in *SearchJobsByPositionRequest, opts ...grpc.CallOption) (*SearchJobsByPositionResponse, error) {
+	out := new(SearchJobsByPositionResponse)
+	err := c.cc.Invoke(ctx, "/post.PostService/SearchJobsByPosition", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PostServiceServer is the server API for PostService service.
 // All implementations must embed UnimplementedPostServiceServer
 // for forward compatibility
@@ -179,6 +189,7 @@ type PostServiceServer interface {
 	PostJob(context.Context, *PostJobRequest) (*Job, error)
 	GetAllJobs(context.Context, *GetAllJobsRequest) (*GetAllJobsResponse, error)
 	RegisterApiKey(context.Context, *GetApiKeyRequest) (*GetApiKeyResponse, error)
+	SearchJobsByPosition(context.Context, *SearchJobsByPositionRequest) (*SearchJobsByPositionResponse, error)
 	mustEmbedUnimplementedPostServiceServer()
 }
 
@@ -224,6 +235,9 @@ func (UnimplementedPostServiceServer) GetAllJobs(context.Context, *GetAllJobsReq
 }
 func (UnimplementedPostServiceServer) RegisterApiKey(context.Context, *GetApiKeyRequest) (*GetApiKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterApiKey not implemented")
+}
+func (UnimplementedPostServiceServer) SearchJobsByPosition(context.Context, *SearchJobsByPositionRequest) (*SearchJobsByPositionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchJobsByPosition not implemented")
 }
 func (UnimplementedPostServiceServer) mustEmbedUnimplementedPostServiceServer() {}
 
@@ -472,6 +486,24 @@ func _PostService_RegisterApiKey_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PostService_SearchJobsByPosition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchJobsByPositionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PostServiceServer).SearchJobsByPosition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/post.PostService/SearchJobsByPosition",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PostServiceServer).SearchJobsByPosition(ctx, req.(*SearchJobsByPositionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PostService_ServiceDesc is the grpc.ServiceDesc for PostService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -530,6 +562,10 @@ var PostService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RegisterApiKey",
 			Handler:    _PostService_RegisterApiKey_Handler,
+		},
+		{
+			MethodName: "SearchJobsByPosition",
+			Handler:    _PostService_SearchJobsByPosition_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
