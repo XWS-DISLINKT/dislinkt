@@ -21,7 +21,7 @@ service PostService{
   rpc Post(PostRequest) returns(PostResponse) {
     option (google.api.http) = {
       post: "/post"
-      body: "post"
+      body: "*"
     };
   }
   rpc GetByUser(GetRequest) returns(GetAllResponse) {
@@ -32,19 +32,19 @@ service PostService{
   rpc LikePost(ReactionRequest) returns(ReactionResponse) {
     option (google.api.http) = {
       post: "/post/like"
-      body: "reaction"
+      body: "*"
     };
   }
   rpc DislikePost(ReactionRequest) returns(ReactionResponse) {
     option (google.api.http) = {
       post: "/post/dislike"
-      body: "reaction"
+      body: "*"
     };
   }
   rpc CommentPost(CommentRequest) returns(CommentResponse) {
     option (google.api.http) = {
       post: "/post/comment"
-      body: "comment"
+      body: "*"
     };
   }
   rpc GetAllReactionsByPost(GetRequest) returns(AllReactionsResponse) {
