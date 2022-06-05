@@ -156,6 +156,7 @@ message PostReaction {
   string postId = 2;
   string userId = 3;
   string reaction = 4;
+  string username = 5;
 }
 
 message Comment {
@@ -163,6 +164,7 @@ message Comment {
   string postId = 2;
   string userId = 3;
   string text = 4;
+  string username = 5;
 }
 
 message GetRequest {
