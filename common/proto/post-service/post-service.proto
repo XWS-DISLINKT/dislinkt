@@ -84,6 +84,16 @@ service PostService{
       get: "/post/job/{search}"
     };
   }
+  rpc PostJobDislinkt(PostJobDislinktRequest) returns(Job) {
+	option (google.api.http) = {
+      post: "/post/job/dislinkt"
+	  body: "*"
+    };
+  }
+}
+
+message PostJobDislinktRequest {
+	Job job = 1;
 }
 
 message SearchJobsByPositionRequest {
@@ -96,9 +106,9 @@ message SearchJobsByPositionResponse {
 
 message PostJobRequest {
 	Job job = 1;
-	string userId = 2;
-	string apiKey = 3;
+	string apiKey = 2;
 }
+
 message GetApiKeyRequest{
 	string userId = 1;
 }
@@ -130,6 +140,7 @@ message Job {
 	string location = 5;
 	string description = 6;
 	google.protobuf.Timestamp closingDate = 7;
+	string userId = 8;
 }
 
 message Post {
