@@ -102,7 +102,7 @@ func local_request_PostService_GetAll_0(ctx context.Context, marshaler runtime.M
 }
 
 func request_PostService_Post_0(ctx context.Context, marshaler runtime.Marshaler, client PostServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostRequest
+	var protoReq PostM
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -119,7 +119,7 @@ func request_PostService_Post_0(ctx context.Context, marshaler runtime.Marshaler
 }
 
 func local_request_PostService_Post_0(ctx context.Context, marshaler runtime.Marshaler, server PostServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostRequest
+	var protoReq PostM
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)

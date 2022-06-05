@@ -24,7 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type PostServiceClient interface {
 	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error)
 	GetAll(ctx context.Context, in *GetAllRequest, opts ...grpc.CallOption) (*GetAllResponse, error)
-	Post(ctx context.Context, in *PostRequest, opts ...grpc.CallOption) (*PostResponse, error)
+	Post(ctx context.Context, in *PostM, opts ...grpc.CallOption) (*PostM, error)
 	GetByUser(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetAllResponse, error)
 	LikePost(ctx context.Context, in *ReactionRequest, opts ...grpc.CallOption) (*ReactionResponse, error)
 	DislikePost(ctx context.Context, in *ReactionRequest, opts ...grpc.CallOption) (*ReactionResponse, error)
@@ -65,8 +65,8 @@ func (c *postServiceClient) GetAll(ctx context.Context, in *GetAllRequest, opts 
 	return out, nil
 }
 
-func (c *postServiceClient) Post(ctx context.Context, in *PostRequest, opts ...grpc.CallOption) (*PostResponse, error) {
-	out := new(PostResponse)
+func (c *postServiceClient) Post(ctx context.Context, in *PostM, opts ...grpc.CallOption) (*PostM, error) {
+	out := new(PostM)
 	err := c.cc.Invoke(ctx, "/post.PostService/Post", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -188,7 +188,7 @@ func (c *postServiceClient) PostJobDislinkt(ctx context.Context, in *PostJobDisl
 type PostServiceServer interface {
 	Get(context.Context, *GetRequest) (*GetResponse, error)
 	GetAll(context.Context, *GetAllRequest) (*GetAllResponse, error)
-	Post(context.Context, *PostRequest) (*PostResponse, error)
+	Post(context.Context, *PostM) (*PostM, error)
 	GetByUser(context.Context, *GetRequest) (*GetAllResponse, error)
 	LikePost(context.Context, *ReactionRequest) (*ReactionResponse, error)
 	DislikePost(context.Context, *ReactionRequest) (*ReactionResponse, error)
@@ -214,7 +214,7 @@ func (UnimplementedPostServiceServer) Get(context.Context, *GetRequest) (*GetRes
 func (UnimplementedPostServiceServer) GetAll(context.Context, *GetAllRequest) (*GetAllResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAll not implemented")
 }
-func (UnimplementedPostServiceServer) Post(context.Context, *PostRequest) (*PostResponse, error) {
+func (UnimplementedPostServiceServer) Post(context.Context, *PostM) (*PostM, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Post not implemented")
 }
 func (UnimplementedPostServiceServer) GetByUser(context.Context, *GetRequest) (*GetAllResponse, error) {
@@ -303,7 +303,7 @@ func _PostService_GetAll_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _PostService_Post_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostRequest)
+	in := new(PostM)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -315,7 +315,7 @@ func _PostService_Post_Handler(srv interface{}, ctx context.Context, dec func(in
 		FullMethod: "/post.PostService/Post",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PostServiceServer).Post(ctx, req.(*PostRequest))
+		return srv.(PostServiceServer).Post(ctx, req.(*PostM))
 	}
 	return interceptor(ctx, in, info, handler)
 }

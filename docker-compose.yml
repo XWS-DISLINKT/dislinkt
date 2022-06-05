@@ -76,6 +76,13 @@ services:
       context: .
       dockerfile: ./connection-service/Dockerfile
     restart: on-failure
+    environment:
+      CONNECTION_SERVICE_PORT: ${CONNECTION_SERVICE_PORT}
+      CONNECTION_DB_HOST: ${CONNECTION_DB_HOST}
+      CONNECTION_DB_PORT: ${CONNECTION_DB_PORT}
+      CONNECTION_DB_PROTOCOL: ${CONNECTION_DB_PROTOCOL}
+      CONNECTION_DB_USERNAME: ${CONNECTION_DB_USERNAME}
+      CONNECTION_DB_PASSWORD: ${CONNECTION_DB_PASSWORD}
     depends_on:
       - connection-db
     networks:
@@ -97,6 +104,8 @@ services:
 
   connection-db:
     image: neo4j
+    environment:
+      NEO4J_AUTH: 'neo4j/password'
     container_name: connection-db
     restart: on-failure
     networks:
