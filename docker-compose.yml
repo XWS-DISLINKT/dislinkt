@@ -88,6 +88,18 @@ services:
     networks:
       - network
 
+  client-app-service:
+    image: client-app-service
+    container_name: client-app-service
+    build:
+      context: .
+      dockerfile: client-web-app/dislinkt-client/Dockerfile
+    restart: on-failure
+    ports:
+      - "4200:4200"
+    networks:
+      - network
+
   profile-db:
     image: mongo
     container_name: profile-db
