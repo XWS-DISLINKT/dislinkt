@@ -41,10 +41,26 @@ service ProfileService{
       get: "/profile/credentials/{username}"
     };
   }
+  rpc SendMessage(Message) returns(Message) {
+    option (google.api.http) = {
+      post: "/message"
+      body: "*"
+    };
+  }
+  rpc GetChatMessages(GetMessagesRequest) returns(GetMessagesFromChat) {
+    option (google.api.http) = {
+      get: "/message/{senderId}/{receiverId}"
+    };
+  }
 }
 
 message GetRequest {
   string id = 1;
+}
+
+message GetMessagesRequest {
+  string senderId = 1;
+  string receiverId = 2;
 }
 
 message GetAllRequest {
@@ -52,6 +68,10 @@ message GetAllRequest {
 
 message GetAllResponse {
   repeated Profile profiles = 1;
+}
+
+message GetMessagesFromChat {
+  repeated Message messages = 1;
 }
 
 message GetByNameRequest {
@@ -75,6 +95,16 @@ message NewProfile {
   string username = 4;
   string password = 5;
   bool   isPrivate = 6;
+}
+
+message Message {
+  string text = 1;
+  google.protobuf.Timestamp date = 2;
+  bool seen = 3;
+  string senderUsername = 4;
+  string senderId = 5;
+  string receiverUsername = 6;
+  string receiverId = 7;
 }
 
 message Profile {

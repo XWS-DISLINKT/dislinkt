@@ -29,6 +29,8 @@ type ProfileServiceClient interface {
 	Update(ctx context.Context, in *Profile, opts ...grpc.CallOption) (*Profile, error)
 	GetByName(ctx context.Context, in *GetByNameRequest, opts ...grpc.CallOption) (*GetAllResponse, error)
 	GetCredentials(ctx context.Context, in *GetCredentialsRequest, opts ...grpc.CallOption) (*GetCredentialsResponse, error)
+	SendMessage(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error)
+	GetChatMessages(ctx context.Context, in *GetMessagesRequest, opts ...grpc.CallOption) (*GetMessagesFromChat, error)
 }
 
 type profileServiceClient struct {
@@ -93,6 +95,24 @@ func (c *profileServiceClient) GetCredentials(ctx context.Context, in *GetCreden
 	return out, nil
 }
 
+func (c *profileServiceClient) SendMessage(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error) {
+	out := new(Message)
+	err := c.cc.Invoke(ctx, "/profile.ProfileService/SendMessage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *profileServiceClient) GetChatMessages(ctx context.Context, in *GetMessagesRequest, opts ...grpc.CallOption) (*GetMessagesFromChat, error) {
+	out := new(GetMessagesFromChat)
+	err := c.cc.Invoke(ctx, "/profile.ProfileService/GetChatMessages", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProfileServiceServer is the server API for ProfileService service.
 // All implementations must embed UnimplementedProfileServiceServer
 // for forward compatibility
@@ -103,6 +123,8 @@ type ProfileServiceServer interface {
 	Update(context.Context, *Profile) (*Profile, error)
 	GetByName(context.Context, *GetByNameRequest) (*GetAllResponse, error)
 	GetCredentials(context.Context, *GetCredentialsRequest) (*GetCredentialsResponse, error)
+	SendMessage(context.Context, *Message) (*Message, error)
+	GetChatMessages(context.Context, *GetMessagesRequest) (*GetMessagesFromChat, error)
 	mustEmbedUnimplementedProfileServiceServer()
 }
 
@@ -127,6 +149,12 @@ func (UnimplementedProfileServiceServer) GetByName(context.Context, *GetByNameRe
 }
 func (UnimplementedProfileServiceServer) GetCredentials(context.Context, *GetCredentialsRequest) (*GetCredentialsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCredentials not implemented")
+}
+func (UnimplementedProfileServiceServer) SendMessage(context.Context, *Message) (*Message, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
+}
+func (UnimplementedProfileServiceServer) GetChatMessages(context.Context, *GetMessagesRequest) (*GetMessagesFromChat, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetChatMessages not implemented")
 }
 func (UnimplementedProfileServiceServer) mustEmbedUnimplementedProfileServiceServer() {}
 
@@ -249,6 +277,42 @@ func _ProfileService_GetCredentials_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProfileService_SendMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Message)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServiceServer).SendMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/profile.ProfileService/SendMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServiceServer).SendMessage(ctx, req.(*Message))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProfileService_GetChatMessages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMessagesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServiceServer).GetChatMessages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/profile.ProfileService/GetChatMessages",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServiceServer).GetChatMessages(ctx, req.(*GetMessagesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProfileService_ServiceDesc is the grpc.ServiceDesc for ProfileService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -279,6 +343,14 @@ var ProfileService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCredentials",
 			Handler:    _ProfileService_GetCredentials_Handler,
+		},
+		{
+			MethodName: "SendMessage",
+			Handler:    _ProfileService_SendMessage_Handler,
+		},
+		{
+			MethodName: "GetChatMessages",
+			Handler:    _ProfileService_GetChatMessages_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
