@@ -46,6 +46,12 @@ service ConnectionService {
       body: "*"
     };
   }
+  
+  rpc GetSuggestionIdsFor(GetSuggestionIdsRequest) returns(GetSuggestionIdsResponse) {
+    option (google.api.http) = {
+      get: "/connection/suggestion/{id}"
+    };
+  }
 
 }
 
@@ -76,5 +82,13 @@ message GetConnectionsUsernamesRequest {
 }
 
 message GetConnectionsUsernamesResponse {
+  repeated string usernames = 1;
+}
+
+message GetSuggestionIdsRequest {
+  string id = 1;
+}
+
+message GetSuggestionIdsResponse {
   repeated string usernames = 1;
 }
