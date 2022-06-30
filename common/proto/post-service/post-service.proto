@@ -90,6 +90,25 @@ service PostService{
 	  body: "*"
     };
   }
+  rpc SuggestJob(SuggestJobRequest) returns(SuggestJobResponse) {
+	option (google.api.http) = {
+      post: "/post/job/suggest"
+	  body: "*"
+    };
+  }
+}
+message JobPosition {
+	string jobId = 1;
+	string position = 2;
+}
+
+message SuggestJobRequest {
+	string skill = 1;
+	string experience = 2;
+}
+
+message SuggestJobResponse {
+	repeated JobPosition jobPositions = 1;
 }
 
 message PostJobDislinktRequest {

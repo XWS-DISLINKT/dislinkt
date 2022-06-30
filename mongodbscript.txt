@@ -1,0 +1,84 @@
+{
+  "_id": {
+    "$oid": "623b0cc3a34d25d8567f9f84"
+  },
+  "name": "milomir",
+  "lastName": "maric",
+  "username": "mile",
+  "email": "mile@gmail.com",
+  "password": "mile",
+  "dateOfBirth": {
+    "$date": {
+      "$numberLong": "-62135596800000"
+    }
+  },
+  "phoneNumber": "",
+  "gender": 0,
+  "biography": "",
+  "headline": "",
+  "experience": null,
+  "education": [
+    {
+      "id": {
+        "$oid": "623b0cc3a34d25d8567f9f09"
+      },
+      "school": "Fakultet tehnickih nauka, Novi Sad",
+      "fieldOfStudy": "Softversko inzenjerstvo",
+      "degree": "Master"
+    }
+  ],
+  "skills": [
+    "Java",
+    "C"
+  ],
+  "interests": null,
+  "isPrivate": false
+},
+{
+  "_id": {
+    "$oid": "623b0cc3a34d25d8567f9f85"
+  },
+  "name": "pera",
+  "lastName": "peric",
+  "username": "pera",
+  "email": "",
+  "password": "pera",
+  "dateOfBirth": {
+    "$date": {
+      "$numberLong": "-62135596800000"
+    }
+  },
+  "phoneNumber": "",
+  "gender": 0,
+  "biography": "",
+  "headline": "",
+  "experience": null,
+  "education": null,
+  "skills": null,
+  "interests": null,
+  "isPrivate": false
+},
+{
+  "_id": {
+    "$oid": "623b0cc3a34d25d8567f9f86"
+  },
+  "name": "pera",
+  "lastName": "petrovic",
+  "username": "pera",
+  "email": "",
+  "password": "pera",
+  "dateOfBirth": {
+    "$date": {
+      "$numberLong": "-62135596800000"
+    }
+  },
+  "phoneNumber": "",
+  "gender": 0,
+  "biography": "",
+  "headline": "",
+  "experience": null,
+  "education": null,
+  "skills": null,
+  "interests": null,
+  "isPrivate": true
+}
