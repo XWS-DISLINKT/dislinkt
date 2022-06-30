@@ -48,6 +48,8 @@ services:
       context: .
       dockerfile: ./api-gateway/Dockerfile
     restart: on-failure
+    volumes:
+      - static-content:/usr/src/app/assets/images
     ports:
       - ${GATEWAY_PORT}:${GATEWAY_PORT}
     environment:
@@ -103,6 +105,8 @@ services:
       context: .
       dockerfile: client-web-app/dislinkt-client/Dockerfile
     restart: on-failure
+    volumes:
+      - static-content:/usr/src/app/assets/images
     ports:
       - "4200:4200"
     networks:
@@ -150,3 +154,6 @@ services:
 networks:
   network:
     driver: bridge
+
+volumes:
+  static-content:
