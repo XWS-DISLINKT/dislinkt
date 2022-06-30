@@ -28,8 +28,16 @@ services:
       POST_DB_HOST: ${POST_DB_HOST}
       POST_DB_PORT: ${POST_DB_PORT}
       POST_SERVICE_PORT: ${POST_SERVICE_PORT}
+      CONNECTION_SERVICE_HOST: ${CONNECTION_SERVICE_HOST}
+      CONNECTION_SERVICE_PORT: ${CONNECTION_SERVICE_PORT}
+      POST_GRAPH_DB_HOST: ${POST_GRAPH_DB_HOST}
+      POST_GRAPH_DB_PORT: ${POST_GRAPH_DB_PORT}
+      POST_GRAPH_DB_PROTOCOL: ${POST_GRAPH_DB_PROTOCOL}
+      POST_GRAPH_DB_USERNAME: ${POST_GRAPH_DB_USERNAME}
+      POST_GRAPH_DB_PASSWORD: ${POST_GRAPH_DB_PASSWORD}
     depends_on:
       - post-db
+      - post-graph-db
     networks:
       - network
 
@@ -119,6 +127,15 @@ services:
     environment:
       NEO4J_AUTH: 'neo4j/password'
     container_name: connection-db
+    restart: on-failure
+    networks:
+      - network
+
+  post-graph-db:
+    image: neo4j
+    environment:
+      NEO4J_AUTH: 'neo4j/password'
+    container_name: post-graph-db
     restart: on-failure
     networks:
       - network
