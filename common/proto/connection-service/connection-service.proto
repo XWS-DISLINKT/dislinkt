@@ -53,6 +53,13 @@ service ConnectionService {
     };
   }
 
+  rpc BlockConnection(ConnectionBody) returns(ConnectionResponse) {
+    option (google.api.http) = {
+      post: "/connection/block"
+      body: "*"
+    };
+  }
+
 }
 
 message Status {
