@@ -47,6 +47,12 @@ service ProfileService{
       body: "*"
     };
   }
+  rpc UpdateNotificationSettings(NotificationSettings) returns(Profile) {
+    option (google.api.http) = {
+      post: "/notification-settings"
+      body: "*"
+    };
+  }
   rpc GetChatMessages(GetMessagesRequest) returns(GetMessagesFromChat) {
     option (google.api.http) = {
       get: "/message/{senderId}/{receiverId}"
@@ -86,6 +92,13 @@ message GetCredentialsResponse {
   string username = 1;
   string password = 2;
   string id = 3;
+}
+
+message NotificationSettings {
+  string id = 1;
+  bool receivesMessageNotifications = 2;
+  bool receivesPostNotifications = 3;
+  bool receivesConnectionNotifications = 4;
 }
 
 message NewProfile {
@@ -129,6 +142,9 @@ message Profile {
   repeated string skills = 14;
   repeated string interests = 15;
   bool isPrivate = 16;
+  bool ReceivesConnectionNotifications = 17;
+  bool ReceivesPostNotifications = 18;
+  bool ReceivesMessageNotifications = 19;
 }
 
 message Education {
@@ -146,3 +162,4 @@ message Experience {
   google.protobuf.Timestamp startDate = 6;
   google.protobuf.Timestamp endDate = 7;
 }
+

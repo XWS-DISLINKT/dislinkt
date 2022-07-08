@@ -30,6 +30,7 @@ type ProfileServiceClient interface {
 	GetByName(ctx context.Context, in *GetByNameRequest, opts ...grpc.CallOption) (*GetAllResponse, error)
 	GetCredentials(ctx context.Context, in *GetCredentialsRequest, opts ...grpc.CallOption) (*GetCredentialsResponse, error)
 	SendMessage(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error)
+	UpdateNotificationSettings(ctx context.Context, in *NotificationSettings, opts ...grpc.CallOption) (*Profile, error)
 	GetChatMessages(ctx context.Context, in *GetMessagesRequest, opts ...grpc.CallOption) (*GetMessagesFromChat, error)
 }
 
@@ -104,6 +105,15 @@ func (c *profileServiceClient) SendMessage(ctx context.Context, in *Message, opt
 	return out, nil
 }
 
+func (c *profileServiceClient) UpdateNotificationSettings(ctx context.Context, in *NotificationSettings, opts ...grpc.CallOption) (*Profile, error) {
+	out := new(Profile)
+	err := c.cc.Invoke(ctx, "/profile.ProfileService/UpdateNotificationSettings", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *profileServiceClient) GetChatMessages(ctx context.Context, in *GetMessagesRequest, opts ...grpc.CallOption) (*GetMessagesFromChat, error) {
 	out := new(GetMessagesFromChat)
 	err := c.cc.Invoke(ctx, "/profile.ProfileService/GetChatMessages", in, out, opts...)
@@ -124,6 +134,7 @@ type ProfileServiceServer interface {
 	GetByName(context.Context, *GetByNameRequest) (*GetAllResponse, error)
 	GetCredentials(context.Context, *GetCredentialsRequest) (*GetCredentialsResponse, error)
 	SendMessage(context.Context, *Message) (*Message, error)
+	UpdateNotificationSettings(context.Context, *NotificationSettings) (*Profile, error)
 	GetChatMessages(context.Context, *GetMessagesRequest) (*GetMessagesFromChat, error)
 	mustEmbedUnimplementedProfileServiceServer()
 }
@@ -152,6 +163,9 @@ func (UnimplementedProfileServiceServer) GetCredentials(context.Context, *GetCre
 }
 func (UnimplementedProfileServiceServer) SendMessage(context.Context, *Message) (*Message, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
+}
+func (UnimplementedProfileServiceServer) UpdateNotificationSettings(context.Context, *NotificationSettings) (*Profile, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNotificationSettings not implemented")
 }
 func (UnimplementedProfileServiceServer) GetChatMessages(context.Context, *GetMessagesRequest) (*GetMessagesFromChat, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChatMessages not implemented")
@@ -295,6 +309,24 @@ func _ProfileService_SendMessage_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProfileService_UpdateNotificationSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NotificationSettings)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServiceServer).UpdateNotificationSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/profile.ProfileService/UpdateNotificationSettings",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServiceServer).UpdateNotificationSettings(ctx, req.(*NotificationSettings))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ProfileService_GetChatMessages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetMessagesRequest)
 	if err := dec(in); err != nil {
@@ -347,6 +379,10 @@ var ProfileService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendMessage",
 			Handler:    _ProfileService_SendMessage_Handler,
+		},
+		{
+			MethodName: "UpdateNotificationSettings",
+			Handler:    _ProfileService_UpdateNotificationSettings_Handler,
 		},
 		{
 			MethodName: "GetChatMessages",
