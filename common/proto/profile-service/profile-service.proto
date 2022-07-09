@@ -53,6 +53,22 @@ service ProfileService{
       body: "*"
     };
   }
+  rpc GetNotificationsByUser(GetNotificationsRequest) returns(GetNotificationsResponse) {
+    option (google.api.http) = {
+      get: "/notification/user/{userId}"
+    };
+  }
+  rpc SeeNotificationsByUser(GetNotificationsRequest) returns(GetNotificationsResponse) {
+    option (google.api.http) = {
+      get: "/notification/see/user/{userId}"
+    };
+  }
+  rpc SendNotification(NewNotificationRequest) returns(Notification) {
+    option (google.api.http) = {
+      post: "/notification"
+      body: "*"
+    };
+  }
   rpc GetChatMessages(GetMessagesRequest) returns(GetMessagesFromChat) {
     option (google.api.http) = {
       get: "/message/{senderId}/{receiverId}"
@@ -67,6 +83,14 @@ message GetRequest {
 message GetMessagesRequest {
   string senderId = 1;
   string receiverId = 2;
+}
+
+message GetNotificationsRequest {
+  string userId = 1;
+}
+
+message GetNotificationsResponse {
+  repeated Notification notifications = 1;
 }
 
 message GetAllRequest {
@@ -118,6 +142,21 @@ message Message {
   string senderId = 5;
   string receiverUsername = 6;
   string receiverId = 7;
+}
+
+message Notification {
+  string id = 1;
+  string content = 2;
+  google.protobuf.Timestamp date = 3;
+  bool seen = 4;
+  string notificationType = 5;
+  string receiverId = 6;
+}
+
+message NewNotificationRequest {
+  string NotificationType = 1;
+  string senderId = 2;
+  string receiverId = 3;
 }
 
 message Profile {
