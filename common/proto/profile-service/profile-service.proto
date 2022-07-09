@@ -47,6 +47,28 @@ service ProfileService{
       body: "*"
     };
   }
+  rpc UpdateNotificationSettings(NotificationSettings) returns(Profile) {
+    option (google.api.http) = {
+      post: "/notification-settings"
+      body: "*"
+    };
+  }
+  rpc GetNotificationsByUser(GetNotificationsRequest) returns(GetNotificationsResponse) {
+    option (google.api.http) = {
+      get: "/notification/user/{userId}"
+    };
+  }
+  rpc SeeNotificationsByUser(GetNotificationsRequest) returns(GetNotificationsResponse) {
+    option (google.api.http) = {
+      get: "/notification/see/user/{userId}"
+    };
+  }
+  rpc SendNotification(NewNotificationRequest) returns(Notification) {
+    option (google.api.http) = {
+      post: "/notification"
+      body: "*"
+    };
+  }
   rpc GetChatMessages(GetMessagesRequest) returns(GetMessagesFromChat) {
     option (google.api.http) = {
       get: "/message/{senderId}/{receiverId}"
@@ -61,6 +83,14 @@ message GetRequest {
 message GetMessagesRequest {
   string senderId = 1;
   string receiverId = 2;
+}
+
+message GetNotificationsRequest {
+  string userId = 1;
+}
+
+message GetNotificationsResponse {
+  repeated Notification notifications = 1;
 }
 
 message GetAllRequest {
@@ -88,6 +118,13 @@ message GetCredentialsResponse {
   string id = 3;
 }
 
+message NotificationSettings {
+  string id = 1;
+  bool receivesMessageNotifications = 2;
+  bool receivesPostNotifications = 3;
+  bool receivesConnectionNotifications = 4;
+}
+
 message NewProfile {
   string name = 1;
   string lastName = 2;
@@ -105,6 +142,21 @@ message Message {
   string senderId = 5;
   string receiverUsername = 6;
   string receiverId = 7;
+}
+
+message Notification {
+  string id = 1;
+  string content = 2;
+  google.protobuf.Timestamp date = 3;
+  bool seen = 4;
+  string notificationType = 5;
+  string receiverId = 6;
+}
+
+message NewNotificationRequest {
+  string NotificationType = 1;
+  string senderId = 2;
+  string receiverId = 3;
 }
 
 message Profile {
@@ -129,6 +181,9 @@ message Profile {
   repeated string skills = 14;
   repeated string interests = 15;
   bool isPrivate = 16;
+  bool ReceivesConnectionNotifications = 17;
+  bool ReceivesPostNotifications = 18;
+  bool ReceivesMessageNotifications = 19;
 }
 
 message Education {
@@ -146,3 +201,4 @@ message Experience {
   google.protobuf.Timestamp startDate = 6;
   google.protobuf.Timestamp endDate = 7;
 }
+
