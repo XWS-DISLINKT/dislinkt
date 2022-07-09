@@ -1,5 +1,10 @@
 version: "3.8"
 
+x-logging: &fluent-bit
+  driver: fluentd
+  options:
+    fluentd-address: ${FLUENT_BIT_ADDRESS}:24224
+
 services:
   profile-service:
     image: profile-service
@@ -12,10 +17,14 @@ services:
       PROFILE_DB_HOST: ${PROFILE_DB_HOST}
       PROFILE_DB_PORT: ${PROFILE_DB_PORT}
       PROFILE_SERVICE_PORT: ${PROFILE_SERVICE_PORT}
+      CONNECTION_SERVICE_HOST: ${CONNECTION_SERVICE_HOST}
+      CONNECTION_SERVICE_PORT: ${CONNECTION_SERVICE_PORT}
+    logging: *fluent-bit
     depends_on:
       - profile-db
     networks:
-      - network
+      - servers
+      - monitoring
 
   post-service:
     image: post-service
@@ -35,11 +44,13 @@ services:
       POST_GRAPH_DB_PROTOCOL: ${POST_GRAPH_DB_PROTOCOL}
       POST_GRAPH_DB_USERNAME: ${POST_GRAPH_DB_USERNAME}
       POST_GRAPH_DB_PASSWORD: ${POST_GRAPH_DB_PASSWORD}
+    logging: *fluent-bit
     depends_on:
       - post-db
       - post-graph-db
     networks:
-      - network
+      - servers
+      - monitoring
 
   api-gateway:
     image: api-gateway
@@ -60,8 +71,18 @@ services:
       POST_SERVICE_PORT: ${POST_SERVICE_PORT}
       AUTHENTICATION_SERVICE_HOST: ${AUTHENTICATION_SERVICE_HOST}
       AUTHENTICATION_SERVICE_PORT: ${AUTHENTICATION_SERVICE_PORT}
+      CONNECTION_SERVICE_HOST: ${CONNECTION_SERVICE_HOST}
+      CONNECTION_SERVICE_PORT: ${CONNECTION_SERVICE_PORT}
+      JAEGER_SERVICE_NAME: post_service
+      JAEGER_AGENT_HOST: jaeger
+      JAEGER_AGENT_PORT: 6831
+      JAEGER_SAMPLER_MANAGER_HOST_PORT: jaeger:5778
+      JAEGER_SAMPLER_TYPE: const
+      JAEGER_SAMPLER_PARAM: 1
+    logging: *fluent-bit
     networks:
-      - network
+      - servers
+      - monitoring
 
   authentication-service:
     image: authentication-service
@@ -76,8 +97,10 @@ services:
       AUTHENTICATION_SERVICE_PORT: ${AUTHENTICATION_SERVICE_PORT}
       PROFILE_SERVICE_HOST: ${PROFILE_SERVICE_HOST}
       PROFILE_SERVICE_PORT: ${PROFILE_SERVICE_PORT}
+    logging: *fluent-bit
     networks:
-      - network
+      - servers
+      - monitoring
 
   connection-service:
     image: connection-service
@@ -93,10 +116,12 @@ services:
       CONNECTION_DB_PROTOCOL: ${CONNECTION_DB_PROTOCOL}
       CONNECTION_DB_USERNAME: ${CONNECTION_DB_USERNAME}
       CONNECTION_DB_PASSWORD: ${CONNECTION_DB_PASSWORD}
+    logging: *fluent-bit
     depends_on:
       - connection-db
     networks:
-      - network
+      - servers
+      - monitoring
 
   client-app-service:
     image: client-app-service
@@ -109,22 +134,28 @@ services:
       - static-content:/usr/src/app/assets/images
     ports:
       - "4200:4200"
+    logging: *fluent-bit
     networks:
-      - network
+      - servers
+      - monitoring
 
   profile-db:
     image: mongo
     container_name: profile-db
     restart: on-failure
+    logging: *fluent-bit
     networks:
-      - network
+      - servers
+      - monitoring
 
   post-db:
     image: mongo
     container_name: post-db
     restart: on-failure
+    logging: *fluent-bit
     networks:
-      - network
+      - servers
+      - monitoring
 
   connection-db:
     image: neo4j
@@ -132,8 +163,10 @@ services:
       NEO4J_AUTH: 'neo4j/password'
     container_name: connection-db
     restart: on-failure
+    logging: *fluent-bit
     networks:
-      - network
+      - servers
+      - monitoring
 
   post-graph-db:
     image: neo4j
@@ -141,19 +174,26 @@ services:
       NEO4J_AUTH: 'neo4j/password'
     container_name: post-graph-db
     restart: on-failure
+    logging: *fluent-bit
     networks:
-      - network
+      - servers
+      - monitoring
 
   nats:
     image: nats
     container_name: nats
     restart: on-failure
+    logging: *fluent-bit
     networks:
-      - network
+      - servers
+      - monitoring
 
 networks:
-  network:
+  servers:
+    name: servers
     driver: bridge
+  monitoring:
+    external: true
 
 volumes:
   static-content:
