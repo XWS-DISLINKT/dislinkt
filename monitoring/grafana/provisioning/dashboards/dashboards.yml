@@ -5,3 +5,8 @@ providers:
     type: file
     options:
       path:  /var/lib/grafana/dashboards/node-exporter
+
+  - name: cAdvisor
+    type: file
+    options:
+      path: /var/lib/grafana/dashboards/cadvisor
