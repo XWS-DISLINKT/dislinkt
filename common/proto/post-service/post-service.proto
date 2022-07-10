@@ -96,7 +96,24 @@ service PostService{
 	  body: "*"
     };
   }
+  
+  rpc GetSuggestJobsFor(GetSuggestJobsForRequest) returns(GetSuggestJobsForResponse) {
+    option (google.api.http) = {
+      get: "/post/job/suggest/{id}"
+    };
+  }
+  
+  
 }
+
+message GetSuggestJobsForRequest {
+  string id = 1;
+}
+
+message GetSuggestJobsForResponse {
+  repeated JobPosition jobPositions = 1;
+}
+
 message JobPosition {
 	string jobId = 1;
 	string position = 2;

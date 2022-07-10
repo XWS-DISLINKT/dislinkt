@@ -38,6 +38,7 @@ type PostServiceClient interface {
 	SearchJobsByPosition(ctx context.Context, in *SearchJobsByPositionRequest, opts ...grpc.CallOption) (*SearchJobsByPositionResponse, error)
 	PostJobDislinkt(ctx context.Context, in *PostJobDislinktRequest, opts ...grpc.CallOption) (*Job, error)
 	SuggestJob(ctx context.Context, in *SuggestJobRequest, opts ...grpc.CallOption) (*SuggestJobResponse, error)
+	GetSuggestJobsFor(ctx context.Context, in *GetSuggestJobsForRequest, opts ...grpc.CallOption) (*GetSuggestJobsForResponse, error)
 }
 
 type postServiceClient struct {
@@ -192,6 +193,15 @@ func (c *postServiceClient) SuggestJob(ctx context.Context, in *SuggestJobReques
 	return out, nil
 }
 
+func (c *postServiceClient) GetSuggestJobsFor(ctx context.Context, in *GetSuggestJobsForRequest, opts ...grpc.CallOption) (*GetSuggestJobsForResponse, error) {
+	out := new(GetSuggestJobsForResponse)
+	err := c.cc.Invoke(ctx, "/post.PostService/GetSuggestJobsFor", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PostServiceServer is the server API for PostService service.
 // All implementations must embed UnimplementedPostServiceServer
 // for forward compatibility
@@ -212,6 +222,7 @@ type PostServiceServer interface {
 	SearchJobsByPosition(context.Context, *SearchJobsByPositionRequest) (*SearchJobsByPositionResponse, error)
 	PostJobDislinkt(context.Context, *PostJobDislinktRequest) (*Job, error)
 	SuggestJob(context.Context, *SuggestJobRequest) (*SuggestJobResponse, error)
+	GetSuggestJobsFor(context.Context, *GetSuggestJobsForRequest) (*GetSuggestJobsForResponse, error)
 	mustEmbedUnimplementedPostServiceServer()
 }
 
@@ -266,6 +277,9 @@ func (UnimplementedPostServiceServer) PostJobDislinkt(context.Context, *PostJobD
 }
 func (UnimplementedPostServiceServer) SuggestJob(context.Context, *SuggestJobRequest) (*SuggestJobResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SuggestJob not implemented")
+}
+func (UnimplementedPostServiceServer) GetSuggestJobsFor(context.Context, *GetSuggestJobsForRequest) (*GetSuggestJobsForResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSuggestJobsFor not implemented")
 }
 func (UnimplementedPostServiceServer) mustEmbedUnimplementedPostServiceServer() {}
 
@@ -568,6 +582,24 @@ func _PostService_SuggestJob_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PostService_GetSuggestJobsFor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSuggestJobsForRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PostServiceServer).GetSuggestJobsFor(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/post.PostService/GetSuggestJobsFor",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PostServiceServer).GetSuggestJobsFor(ctx, req.(*GetSuggestJobsForRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PostService_ServiceDesc is the grpc.ServiceDesc for PostService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -638,6 +670,10 @@ var PostService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SuggestJob",
 			Handler:    _PostService_SuggestJob_Handler,
+		},
+		{
+			MethodName: "GetSuggestJobsFor",
+			Handler:    _PostService_GetSuggestJobsFor_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

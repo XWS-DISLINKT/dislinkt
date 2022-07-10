@@ -68,7 +68,101 @@ func (x Job_Seniority) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Job_Seniority.Descriptor instead.
 func (Job_Seniority) EnumDescriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{11, 0}
+	return file_post_service_proto_rawDescGZIP(), []int{13, 0}
+}
+
+type GetSuggestJobsForRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *GetSuggestJobsForRequest) Reset() {
+	*x = GetSuggestJobsForRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_post_service_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetSuggestJobsForRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSuggestJobsForRequest) ProtoMessage() {}
+
+func (x *GetSuggestJobsForRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_post_service_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSuggestJobsForRequest.ProtoReflect.Descriptor instead.
+func (*GetSuggestJobsForRequest) Descriptor() ([]byte, []int) {
+	return file_post_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *GetSuggestJobsForRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type GetSuggestJobsForResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	JobPositions []*JobPosition `protobuf:"bytes,1,rep,name=jobPositions,proto3" json:"jobPositions,omitempty"`
+}
+
+func (x *GetSuggestJobsForResponse) Reset() {
+	*x = GetSuggestJobsForResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_post_service_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetSuggestJobsForResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSuggestJobsForResponse) ProtoMessage() {}
+
+func (x *GetSuggestJobsForResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_post_service_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSuggestJobsForResponse.ProtoReflect.Descriptor instead.
+func (*GetSuggestJobsForResponse) Descriptor() ([]byte, []int) {
+	return file_post_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GetSuggestJobsForResponse) GetJobPositions() []*JobPosition {
+	if x != nil {
+		return x.JobPositions
+	}
+	return nil
 }
 
 type JobPosition struct {
@@ -83,7 +177,7 @@ type JobPosition struct {
 func (x *JobPosition) Reset() {
 	*x = JobPosition{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[0]
+		mi := &file_post_service_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -96,7 +190,7 @@ func (x *JobPosition) String() string {
 func (*JobPosition) ProtoMessage() {}
 
 func (x *JobPosition) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[0]
+	mi := &file_post_service_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -109,7 +203,7 @@ func (x *JobPosition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JobPosition.ProtoReflect.Descriptor instead.
 func (*JobPosition) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{0}
+	return file_post_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *JobPosition) GetJobId() string {
@@ -138,7 +232,7 @@ type SuggestJobRequest struct {
 func (x *SuggestJobRequest) Reset() {
 	*x = SuggestJobRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[1]
+		mi := &file_post_service_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -151,7 +245,7 @@ func (x *SuggestJobRequest) String() string {
 func (*SuggestJobRequest) ProtoMessage() {}
 
 func (x *SuggestJobRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[1]
+	mi := &file_post_service_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -164,7 +258,7 @@ func (x *SuggestJobRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SuggestJobRequest.ProtoReflect.Descriptor instead.
 func (*SuggestJobRequest) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{1}
+	return file_post_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *SuggestJobRequest) GetSkill() string {
@@ -192,7 +286,7 @@ type SuggestJobResponse struct {
 func (x *SuggestJobResponse) Reset() {
 	*x = SuggestJobResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[2]
+		mi := &file_post_service_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -205,7 +299,7 @@ func (x *SuggestJobResponse) String() string {
 func (*SuggestJobResponse) ProtoMessage() {}
 
 func (x *SuggestJobResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[2]
+	mi := &file_post_service_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -218,7 +312,7 @@ func (x *SuggestJobResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SuggestJobResponse.ProtoReflect.Descriptor instead.
 func (*SuggestJobResponse) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{2}
+	return file_post_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SuggestJobResponse) GetJobPositions() []*JobPosition {
@@ -239,7 +333,7 @@ type PostJobDislinktRequest struct {
 func (x *PostJobDislinktRequest) Reset() {
 	*x = PostJobDislinktRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[3]
+		mi := &file_post_service_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -252,7 +346,7 @@ func (x *PostJobDislinktRequest) String() string {
 func (*PostJobDislinktRequest) ProtoMessage() {}
 
 func (x *PostJobDislinktRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[3]
+	mi := &file_post_service_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -265,7 +359,7 @@ func (x *PostJobDislinktRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostJobDislinktRequest.ProtoReflect.Descriptor instead.
 func (*PostJobDislinktRequest) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{3}
+	return file_post_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *PostJobDislinktRequest) GetJob() *Job {
@@ -286,7 +380,7 @@ type SearchJobsByPositionRequest struct {
 func (x *SearchJobsByPositionRequest) Reset() {
 	*x = SearchJobsByPositionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[4]
+		mi := &file_post_service_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -299,7 +393,7 @@ func (x *SearchJobsByPositionRequest) String() string {
 func (*SearchJobsByPositionRequest) ProtoMessage() {}
 
 func (x *SearchJobsByPositionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[4]
+	mi := &file_post_service_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -312,7 +406,7 @@ func (x *SearchJobsByPositionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchJobsByPositionRequest.ProtoReflect.Descriptor instead.
 func (*SearchJobsByPositionRequest) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{4}
+	return file_post_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *SearchJobsByPositionRequest) GetSearch() string {
@@ -333,7 +427,7 @@ type SearchJobsByPositionResponse struct {
 func (x *SearchJobsByPositionResponse) Reset() {
 	*x = SearchJobsByPositionResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[5]
+		mi := &file_post_service_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -346,7 +440,7 @@ func (x *SearchJobsByPositionResponse) String() string {
 func (*SearchJobsByPositionResponse) ProtoMessage() {}
 
 func (x *SearchJobsByPositionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[5]
+	mi := &file_post_service_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -359,7 +453,7 @@ func (x *SearchJobsByPositionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchJobsByPositionResponse.ProtoReflect.Descriptor instead.
 func (*SearchJobsByPositionResponse) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{5}
+	return file_post_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *SearchJobsByPositionResponse) GetJobs() []*Job {
@@ -381,7 +475,7 @@ type PostJobRequest struct {
 func (x *PostJobRequest) Reset() {
 	*x = PostJobRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[6]
+		mi := &file_post_service_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -394,7 +488,7 @@ func (x *PostJobRequest) String() string {
 func (*PostJobRequest) ProtoMessage() {}
 
 func (x *PostJobRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[6]
+	mi := &file_post_service_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -407,7 +501,7 @@ func (x *PostJobRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostJobRequest.ProtoReflect.Descriptor instead.
 func (*PostJobRequest) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{6}
+	return file_post_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *PostJobRequest) GetJob() *Job {
@@ -435,7 +529,7 @@ type GetApiKeyRequest struct {
 func (x *GetApiKeyRequest) Reset() {
 	*x = GetApiKeyRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[7]
+		mi := &file_post_service_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -448,7 +542,7 @@ func (x *GetApiKeyRequest) String() string {
 func (*GetApiKeyRequest) ProtoMessage() {}
 
 func (x *GetApiKeyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[7]
+	mi := &file_post_service_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -461,7 +555,7 @@ func (x *GetApiKeyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetApiKeyRequest.ProtoReflect.Descriptor instead.
 func (*GetApiKeyRequest) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{7}
+	return file_post_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetApiKeyRequest) GetUserId() string {
@@ -483,7 +577,7 @@ type GetApiKeyResponse struct {
 func (x *GetApiKeyResponse) Reset() {
 	*x = GetApiKeyResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[8]
+		mi := &file_post_service_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -496,7 +590,7 @@ func (x *GetApiKeyResponse) String() string {
 func (*GetApiKeyResponse) ProtoMessage() {}
 
 func (x *GetApiKeyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[8]
+	mi := &file_post_service_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -509,7 +603,7 @@ func (x *GetApiKeyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetApiKeyResponse.ProtoReflect.Descriptor instead.
 func (*GetApiKeyResponse) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{8}
+	return file_post_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetApiKeyResponse) GetUserId() string {
@@ -537,7 +631,7 @@ type GetAllJobsRequest struct {
 func (x *GetAllJobsRequest) Reset() {
 	*x = GetAllJobsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[9]
+		mi := &file_post_service_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -550,7 +644,7 @@ func (x *GetAllJobsRequest) String() string {
 func (*GetAllJobsRequest) ProtoMessage() {}
 
 func (x *GetAllJobsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[9]
+	mi := &file_post_service_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -563,7 +657,7 @@ func (x *GetAllJobsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllJobsRequest.ProtoReflect.Descriptor instead.
 func (*GetAllJobsRequest) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{9}
+	return file_post_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetAllJobsRequest) GetSearch() string {
@@ -584,7 +678,7 @@ type GetAllJobsResponse struct {
 func (x *GetAllJobsResponse) Reset() {
 	*x = GetAllJobsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[10]
+		mi := &file_post_service_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -597,7 +691,7 @@ func (x *GetAllJobsResponse) String() string {
 func (*GetAllJobsResponse) ProtoMessage() {}
 
 func (x *GetAllJobsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[10]
+	mi := &file_post_service_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -610,7 +704,7 @@ func (x *GetAllJobsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllJobsResponse.ProtoReflect.Descriptor instead.
 func (*GetAllJobsResponse) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{10}
+	return file_post_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetAllJobsResponse) GetJobs() []*Job {
@@ -638,7 +732,7 @@ type Job struct {
 func (x *Job) Reset() {
 	*x = Job{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[11]
+		mi := &file_post_service_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -651,7 +745,7 @@ func (x *Job) String() string {
 func (*Job) ProtoMessage() {}
 
 func (x *Job) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[11]
+	mi := &file_post_service_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -664,7 +758,7 @@ func (x *Job) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Job.ProtoReflect.Descriptor instead.
 func (*Job) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{11}
+	return file_post_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *Job) GetId() string {
@@ -738,7 +832,7 @@ type PostM struct {
 func (x *PostM) Reset() {
 	*x = PostM{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[12]
+		mi := &file_post_service_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -751,7 +845,7 @@ func (x *PostM) String() string {
 func (*PostM) ProtoMessage() {}
 
 func (x *PostM) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[12]
+	mi := &file_post_service_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -764,7 +858,7 @@ func (x *PostM) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostM.ProtoReflect.Descriptor instead.
 func (*PostM) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{12}
+	return file_post_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *PostM) GetId() string {
@@ -817,7 +911,7 @@ type PostReaction struct {
 func (x *PostReaction) Reset() {
 	*x = PostReaction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[13]
+		mi := &file_post_service_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -830,7 +924,7 @@ func (x *PostReaction) String() string {
 func (*PostReaction) ProtoMessage() {}
 
 func (x *PostReaction) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[13]
+	mi := &file_post_service_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -843,7 +937,7 @@ func (x *PostReaction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostReaction.ProtoReflect.Descriptor instead.
 func (*PostReaction) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{13}
+	return file_post_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *PostReaction) GetId() string {
@@ -896,7 +990,7 @@ type Comment struct {
 func (x *Comment) Reset() {
 	*x = Comment{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[14]
+		mi := &file_post_service_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -909,7 +1003,7 @@ func (x *Comment) String() string {
 func (*Comment) ProtoMessage() {}
 
 func (x *Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[14]
+	mi := &file_post_service_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -922,7 +1016,7 @@ func (x *Comment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Comment.ProtoReflect.Descriptor instead.
 func (*Comment) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{14}
+	return file_post_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *Comment) GetId() string {
@@ -971,7 +1065,7 @@ type GetRequest struct {
 func (x *GetRequest) Reset() {
 	*x = GetRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[15]
+		mi := &file_post_service_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -984,7 +1078,7 @@ func (x *GetRequest) String() string {
 func (*GetRequest) ProtoMessage() {}
 
 func (x *GetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[15]
+	mi := &file_post_service_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -997,7 +1091,7 @@ func (x *GetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRequest.ProtoReflect.Descriptor instead.
 func (*GetRequest) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{15}
+	return file_post_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetRequest) GetId() string {
@@ -1018,7 +1112,7 @@ type GetResponse struct {
 func (x *GetResponse) Reset() {
 	*x = GetResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[16]
+		mi := &file_post_service_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1031,7 +1125,7 @@ func (x *GetResponse) String() string {
 func (*GetResponse) ProtoMessage() {}
 
 func (x *GetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[16]
+	mi := &file_post_service_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1044,7 +1138,7 @@ func (x *GetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetResponse.ProtoReflect.Descriptor instead.
 func (*GetResponse) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{16}
+	return file_post_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GetResponse) GetPost() *PostM {
@@ -1063,7 +1157,7 @@ type GetAllRequest struct {
 func (x *GetAllRequest) Reset() {
 	*x = GetAllRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[17]
+		mi := &file_post_service_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1076,7 +1170,7 @@ func (x *GetAllRequest) String() string {
 func (*GetAllRequest) ProtoMessage() {}
 
 func (x *GetAllRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[17]
+	mi := &file_post_service_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1089,7 +1183,7 @@ func (x *GetAllRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllRequest.ProtoReflect.Descriptor instead.
 func (*GetAllRequest) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{17}
+	return file_post_service_proto_rawDescGZIP(), []int{19}
 }
 
 type GetAllResponse struct {
@@ -1103,7 +1197,7 @@ type GetAllResponse struct {
 func (x *GetAllResponse) Reset() {
 	*x = GetAllResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[18]
+		mi := &file_post_service_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1116,7 +1210,7 @@ func (x *GetAllResponse) String() string {
 func (*GetAllResponse) ProtoMessage() {}
 
 func (x *GetAllResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[18]
+	mi := &file_post_service_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1129,7 +1223,7 @@ func (x *GetAllResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllResponse.ProtoReflect.Descriptor instead.
 func (*GetAllResponse) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{18}
+	return file_post_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *GetAllResponse) GetPosts() []*PostM {
@@ -1150,7 +1244,7 @@ type PostRequest struct {
 func (x *PostRequest) Reset() {
 	*x = PostRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[19]
+		mi := &file_post_service_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1163,7 +1257,7 @@ func (x *PostRequest) String() string {
 func (*PostRequest) ProtoMessage() {}
 
 func (x *PostRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[19]
+	mi := &file_post_service_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1176,7 +1270,7 @@ func (x *PostRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostRequest.ProtoReflect.Descriptor instead.
 func (*PostRequest) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{19}
+	return file_post_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *PostRequest) GetPost() *PostM {
@@ -1197,7 +1291,7 @@ type PostResponse struct {
 func (x *PostResponse) Reset() {
 	*x = PostResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[20]
+		mi := &file_post_service_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1210,7 +1304,7 @@ func (x *PostResponse) String() string {
 func (*PostResponse) ProtoMessage() {}
 
 func (x *PostResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[20]
+	mi := &file_post_service_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1223,7 +1317,7 @@ func (x *PostResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostResponse.ProtoReflect.Descriptor instead.
 func (*PostResponse) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{20}
+	return file_post_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *PostResponse) GetPost() *PostM {
@@ -1244,7 +1338,7 @@ type ReactionRequest struct {
 func (x *ReactionRequest) Reset() {
 	*x = ReactionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[21]
+		mi := &file_post_service_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1257,7 +1351,7 @@ func (x *ReactionRequest) String() string {
 func (*ReactionRequest) ProtoMessage() {}
 
 func (x *ReactionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[21]
+	mi := &file_post_service_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1270,7 +1364,7 @@ func (x *ReactionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReactionRequest.ProtoReflect.Descriptor instead.
 func (*ReactionRequest) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{21}
+	return file_post_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ReactionRequest) GetReaction() *PostReaction {
@@ -1291,7 +1385,7 @@ type ReactionResponse struct {
 func (x *ReactionResponse) Reset() {
 	*x = ReactionResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[22]
+		mi := &file_post_service_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1304,7 +1398,7 @@ func (x *ReactionResponse) String() string {
 func (*ReactionResponse) ProtoMessage() {}
 
 func (x *ReactionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[22]
+	mi := &file_post_service_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1317,7 +1411,7 @@ func (x *ReactionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReactionResponse.ProtoReflect.Descriptor instead.
 func (*ReactionResponse) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{22}
+	return file_post_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ReactionResponse) GetPostReaction() *PostReaction {
@@ -1338,7 +1432,7 @@ type CommentRequest struct {
 func (x *CommentRequest) Reset() {
 	*x = CommentRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[23]
+		mi := &file_post_service_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1351,7 +1445,7 @@ func (x *CommentRequest) String() string {
 func (*CommentRequest) ProtoMessage() {}
 
 func (x *CommentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[23]
+	mi := &file_post_service_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1364,7 +1458,7 @@ func (x *CommentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CommentRequest.ProtoReflect.Descriptor instead.
 func (*CommentRequest) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{23}
+	return file_post_service_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *CommentRequest) GetComment() *Comment {
@@ -1385,7 +1479,7 @@ type CommentResponse struct {
 func (x *CommentResponse) Reset() {
 	*x = CommentResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[24]
+		mi := &file_post_service_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1398,7 +1492,7 @@ func (x *CommentResponse) String() string {
 func (*CommentResponse) ProtoMessage() {}
 
 func (x *CommentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[24]
+	mi := &file_post_service_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1411,7 +1505,7 @@ func (x *CommentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CommentResponse.ProtoReflect.Descriptor instead.
 func (*CommentResponse) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{24}
+	return file_post_service_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *CommentResponse) GetComment() *Comment {
@@ -1432,7 +1526,7 @@ type AllReactionsResponse struct {
 func (x *AllReactionsResponse) Reset() {
 	*x = AllReactionsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[25]
+		mi := &file_post_service_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1445,7 +1539,7 @@ func (x *AllReactionsResponse) String() string {
 func (*AllReactionsResponse) ProtoMessage() {}
 
 func (x *AllReactionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[25]
+	mi := &file_post_service_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1458,7 +1552,7 @@ func (x *AllReactionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AllReactionsResponse.ProtoReflect.Descriptor instead.
 func (*AllReactionsResponse) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{25}
+	return file_post_service_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *AllReactionsResponse) GetReactions() []*PostReaction {
@@ -1479,7 +1573,7 @@ type AllCommentsResponse struct {
 func (x *AllCommentsResponse) Reset() {
 	*x = AllCommentsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_post_service_proto_msgTypes[26]
+		mi := &file_post_service_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1492,7 +1586,7 @@ func (x *AllCommentsResponse) String() string {
 func (*AllCommentsResponse) ProtoMessage() {}
 
 func (x *AllCommentsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_post_service_proto_msgTypes[26]
+	mi := &file_post_service_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1505,7 +1599,7 @@ func (x *AllCommentsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AllCommentsResponse.ProtoReflect.Descriptor instead.
 func (*AllCommentsResponse) Descriptor() ([]byte, []int) {
-	return file_post_service_proto_rawDescGZIP(), []int{26}
+	return file_post_service_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *AllCommentsResponse) GetComments() []*Comment {
@@ -1523,7 +1617,15 @@ var file_post_service_proto_rawDesc = []byte{
 	0x6c, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f,
 	0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
 	0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74,
-	0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x3f, 0x0a, 0x0b, 0x4a, 0x6f, 0x62,
+	0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x2a, 0x0a, 0x18, 0x47, 0x65, 0x74,
+	0x53, 0x75, 0x67, 0x67, 0x65, 0x73, 0x74, 0x4a, 0x6f, 0x62, 0x73, 0x46, 0x6f, 0x72, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x52, 0x0a, 0x19, 0x47, 0x65, 0x74, 0x53, 0x75, 0x67, 0x67,
+	0x65, 0x73, 0x74, 0x4a, 0x6f, 0x62, 0x73, 0x46, 0x6f, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x35, 0x0a, 0x0c, 0x6a, 0x6f, 0x62, 0x50, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f,
+	0x6e, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x70, 0x6f, 0x73, 0x74, 0x2e,
+	0x4a, 0x6f, 0x62, 0x50, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0c, 0x6a, 0x6f, 0x62,
+	0x50, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0x3f, 0x0a, 0x0b, 0x4a, 0x6f, 0x62,
 	0x50, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x14, 0x0a, 0x05, 0x6a, 0x6f, 0x62, 0x49,
 	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x6a, 0x6f, 0x62, 0x49, 0x64, 0x12, 0x1a,
 	0x0a, 0x08, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
@@ -1650,7 +1752,7 @@ var file_post_service_proto_rawDesc = []byte{
 	0x65, 0x6e, 0x74, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x29, 0x0a, 0x08,
 	0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0d,
 	0x2e, 0x70, 0x6f, 0x73, 0x74, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x08, 0x63,
-	0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x32, 0xcf, 0x0a, 0x0a, 0x0b, 0x50, 0x6f, 0x73, 0x74,
+	0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x32, 0xc5, 0x0b, 0x0a, 0x0b, 0x50, 0x6f, 0x73, 0x74,
 	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x3e, 0x0a, 0x03, 0x47, 0x65, 0x74, 0x12, 0x10,
 	0x2e, 0x70, 0x6f, 0x73, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
 	0x1a, 0x11, 0x2e, 0x70, 0x6f, 0x73, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
@@ -1735,11 +1837,18 @@ var file_post_service_proto_rawDesc = []byte{
 	0x74, 0x1a, 0x18, 0x2e, 0x70, 0x6f, 0x73, 0x74, 0x2e, 0x53, 0x75, 0x67, 0x67, 0x65, 0x73, 0x74,
 	0x4a, 0x6f, 0x62, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x1c, 0x82, 0xd3, 0xe4,
 	0x93, 0x02, 0x16, 0x22, 0x11, 0x2f, 0x70, 0x6f, 0x73, 0x74, 0x2f, 0x6a, 0x6f, 0x62, 0x2f, 0x73,
-	0x75, 0x67, 0x67, 0x65, 0x73, 0x74, 0x3a, 0x01, 0x2a, 0x42, 0x2e, 0x5a, 0x2c, 0x67, 0x69, 0x74,
-	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x58, 0x57, 0x53, 0x2d, 0x44, 0x49, 0x53, 0x4c,
-	0x49, 0x4e, 0x4b, 0x54, 0x2f, 0x64, 0x69, 0x73, 0x6c, 0x69, 0x6e, 0x6b, 0x74, 0x2f, 0x63, 0x6f,
-	0x6d, 0x6d, 0x6f, 0x6e, 0x2f, 0x70, 0x6f, 0x73, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x75, 0x67, 0x67, 0x65, 0x73, 0x74, 0x3a, 0x01, 0x2a, 0x12, 0x74, 0x0a, 0x11, 0x47, 0x65, 0x74,
+	0x53, 0x75, 0x67, 0x67, 0x65, 0x73, 0x74, 0x4a, 0x6f, 0x62, 0x73, 0x46, 0x6f, 0x72, 0x12, 0x1e,
+	0x2e, 0x70, 0x6f, 0x73, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x75, 0x67, 0x67, 0x65, 0x73, 0x74,
+	0x4a, 0x6f, 0x62, 0x73, 0x46, 0x6f, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f,
+	0x2e, 0x70, 0x6f, 0x73, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x75, 0x67, 0x67, 0x65, 0x73, 0x74,
+	0x4a, 0x6f, 0x62, 0x73, 0x46, 0x6f, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x1e, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x18, 0x12, 0x16, 0x2f, 0x70, 0x6f, 0x73, 0x74, 0x2f, 0x6a,
+	0x6f, 0x62, 0x2f, 0x73, 0x75, 0x67, 0x67, 0x65, 0x73, 0x74, 0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x42,
+	0x2e, 0x5a, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x58, 0x57,
+	0x53, 0x2d, 0x44, 0x49, 0x53, 0x4c, 0x49, 0x4e, 0x4b, 0x54, 0x2f, 0x64, 0x69, 0x73, 0x6c, 0x69,
+	0x6e, 0x6b, 0x74, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2f, 0x70, 0x6f, 0x73, 0x74, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1755,93 +1864,98 @@ func file_post_service_proto_rawDescGZIP() []byte {
 }
 
 var file_post_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_post_service_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
+var file_post_service_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
 var file_post_service_proto_goTypes = []interface{}{
 	(Job_Seniority)(0),                   // 0: post.Job.Seniority
-	(*JobPosition)(nil),                  // 1: post.JobPosition
-	(*SuggestJobRequest)(nil),            // 2: post.SuggestJobRequest
-	(*SuggestJobResponse)(nil),           // 3: post.SuggestJobResponse
-	(*PostJobDislinktRequest)(nil),       // 4: post.PostJobDislinktRequest
-	(*SearchJobsByPositionRequest)(nil),  // 5: post.SearchJobsByPositionRequest
-	(*SearchJobsByPositionResponse)(nil), // 6: post.SearchJobsByPositionResponse
-	(*PostJobRequest)(nil),               // 7: post.PostJobRequest
-	(*GetApiKeyRequest)(nil),             // 8: post.GetApiKeyRequest
-	(*GetApiKeyResponse)(nil),            // 9: post.GetApiKeyResponse
-	(*GetAllJobsRequest)(nil),            // 10: post.GetAllJobsRequest
-	(*GetAllJobsResponse)(nil),           // 11: post.GetAllJobsResponse
-	(*Job)(nil),                          // 12: post.Job
-	(*PostM)(nil),                        // 13: post.PostM
-	(*PostReaction)(nil),                 // 14: post.PostReaction
-	(*Comment)(nil),                      // 15: post.Comment
-	(*GetRequest)(nil),                   // 16: post.GetRequest
-	(*GetResponse)(nil),                  // 17: post.GetResponse
-	(*GetAllRequest)(nil),                // 18: post.GetAllRequest
-	(*GetAllResponse)(nil),               // 19: post.GetAllResponse
-	(*PostRequest)(nil),                  // 20: post.PostRequest
-	(*PostResponse)(nil),                 // 21: post.PostResponse
-	(*ReactionRequest)(nil),              // 22: post.ReactionRequest
-	(*ReactionResponse)(nil),             // 23: post.ReactionResponse
-	(*CommentRequest)(nil),               // 24: post.CommentRequest
-	(*CommentResponse)(nil),              // 25: post.CommentResponse
-	(*AllReactionsResponse)(nil),         // 26: post.AllReactionsResponse
-	(*AllCommentsResponse)(nil),          // 27: post.AllCommentsResponse
-	(*timestamppb.Timestamp)(nil),        // 28: google.protobuf.Timestamp
+	(*GetSuggestJobsForRequest)(nil),     // 1: post.GetSuggestJobsForRequest
+	(*GetSuggestJobsForResponse)(nil),    // 2: post.GetSuggestJobsForResponse
+	(*JobPosition)(nil),                  // 3: post.JobPosition
+	(*SuggestJobRequest)(nil),            // 4: post.SuggestJobRequest
+	(*SuggestJobResponse)(nil),           // 5: post.SuggestJobResponse
+	(*PostJobDislinktRequest)(nil),       // 6: post.PostJobDislinktRequest
+	(*SearchJobsByPositionRequest)(nil),  // 7: post.SearchJobsByPositionRequest
+	(*SearchJobsByPositionResponse)(nil), // 8: post.SearchJobsByPositionResponse
+	(*PostJobRequest)(nil),               // 9: post.PostJobRequest
+	(*GetApiKeyRequest)(nil),             // 10: post.GetApiKeyRequest
+	(*GetApiKeyResponse)(nil),            // 11: post.GetApiKeyResponse
+	(*GetAllJobsRequest)(nil),            // 12: post.GetAllJobsRequest
+	(*GetAllJobsResponse)(nil),           // 13: post.GetAllJobsResponse
+	(*Job)(nil),                          // 14: post.Job
+	(*PostM)(nil),                        // 15: post.PostM
+	(*PostReaction)(nil),                 // 16: post.PostReaction
+	(*Comment)(nil),                      // 17: post.Comment
+	(*GetRequest)(nil),                   // 18: post.GetRequest
+	(*GetResponse)(nil),                  // 19: post.GetResponse
+	(*GetAllRequest)(nil),                // 20: post.GetAllRequest
+	(*GetAllResponse)(nil),               // 21: post.GetAllResponse
+	(*PostRequest)(nil),                  // 22: post.PostRequest
+	(*PostResponse)(nil),                 // 23: post.PostResponse
+	(*ReactionRequest)(nil),              // 24: post.ReactionRequest
+	(*ReactionResponse)(nil),             // 25: post.ReactionResponse
+	(*CommentRequest)(nil),               // 26: post.CommentRequest
+	(*CommentResponse)(nil),              // 27: post.CommentResponse
+	(*AllReactionsResponse)(nil),         // 28: post.AllReactionsResponse
+	(*AllCommentsResponse)(nil),          // 29: post.AllCommentsResponse
+	(*timestamppb.Timestamp)(nil),        // 30: google.protobuf.Timestamp
 }
 var file_post_service_proto_depIdxs = []int32{
-	1,  // 0: post.SuggestJobResponse.jobPositions:type_name -> post.JobPosition
-	12, // 1: post.PostJobDislinktRequest.job:type_name -> post.Job
-	12, // 2: post.SearchJobsByPositionResponse.jobs:type_name -> post.Job
-	12, // 3: post.PostJobRequest.job:type_name -> post.Job
-	12, // 4: post.GetAllJobsResponse.jobs:type_name -> post.Job
-	0,  // 5: post.Job.seniority:type_name -> post.Job.Seniority
-	28, // 6: post.Job.closingDate:type_name -> google.protobuf.Timestamp
-	13, // 7: post.GetResponse.post:type_name -> post.PostM
-	13, // 8: post.GetAllResponse.posts:type_name -> post.PostM
-	13, // 9: post.PostRequest.post:type_name -> post.PostM
-	13, // 10: post.PostResponse.post:type_name -> post.PostM
-	14, // 11: post.ReactionRequest.reaction:type_name -> post.PostReaction
-	14, // 12: post.ReactionResponse.postReaction:type_name -> post.PostReaction
-	15, // 13: post.CommentRequest.comment:type_name -> post.Comment
-	15, // 14: post.CommentResponse.comment:type_name -> post.Comment
-	14, // 15: post.AllReactionsResponse.reactions:type_name -> post.PostReaction
-	15, // 16: post.AllCommentsResponse.comments:type_name -> post.Comment
-	16, // 17: post.PostService.Get:input_type -> post.GetRequest
-	18, // 18: post.PostService.GetAll:input_type -> post.GetAllRequest
-	13, // 19: post.PostService.Post:input_type -> post.PostM
-	16, // 20: post.PostService.GetByUser:input_type -> post.GetRequest
-	22, // 21: post.PostService.LikePost:input_type -> post.ReactionRequest
-	22, // 22: post.PostService.DislikePost:input_type -> post.ReactionRequest
-	24, // 23: post.PostService.CommentPost:input_type -> post.CommentRequest
-	16, // 24: post.PostService.GetAllReactionsByPost:input_type -> post.GetRequest
-	16, // 25: post.PostService.GetAllCommentsByPost:input_type -> post.GetRequest
-	16, // 26: post.PostService.GetFeed:input_type -> post.GetRequest
-	7,  // 27: post.PostService.PostJob:input_type -> post.PostJobRequest
-	10, // 28: post.PostService.GetAllJobs:input_type -> post.GetAllJobsRequest
-	8,  // 29: post.PostService.RegisterApiKey:input_type -> post.GetApiKeyRequest
-	5,  // 30: post.PostService.SearchJobsByPosition:input_type -> post.SearchJobsByPositionRequest
-	4,  // 31: post.PostService.PostJobDislinkt:input_type -> post.PostJobDislinktRequest
-	2,  // 32: post.PostService.SuggestJob:input_type -> post.SuggestJobRequest
-	17, // 33: post.PostService.Get:output_type -> post.GetResponse
-	19, // 34: post.PostService.GetAll:output_type -> post.GetAllResponse
-	13, // 35: post.PostService.Post:output_type -> post.PostM
-	19, // 36: post.PostService.GetByUser:output_type -> post.GetAllResponse
-	23, // 37: post.PostService.LikePost:output_type -> post.ReactionResponse
-	23, // 38: post.PostService.DislikePost:output_type -> post.ReactionResponse
-	25, // 39: post.PostService.CommentPost:output_type -> post.CommentResponse
-	26, // 40: post.PostService.GetAllReactionsByPost:output_type -> post.AllReactionsResponse
-	27, // 41: post.PostService.GetAllCommentsByPost:output_type -> post.AllCommentsResponse
-	19, // 42: post.PostService.GetFeed:output_type -> post.GetAllResponse
-	12, // 43: post.PostService.PostJob:output_type -> post.Job
-	11, // 44: post.PostService.GetAllJobs:output_type -> post.GetAllJobsResponse
-	9,  // 45: post.PostService.RegisterApiKey:output_type -> post.GetApiKeyResponse
-	6,  // 46: post.PostService.SearchJobsByPosition:output_type -> post.SearchJobsByPositionResponse
-	12, // 47: post.PostService.PostJobDislinkt:output_type -> post.Job
-	3,  // 48: post.PostService.SuggestJob:output_type -> post.SuggestJobResponse
-	33, // [33:49] is the sub-list for method output_type
-	17, // [17:33] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	3,  // 0: post.GetSuggestJobsForResponse.jobPositions:type_name -> post.JobPosition
+	3,  // 1: post.SuggestJobResponse.jobPositions:type_name -> post.JobPosition
+	14, // 2: post.PostJobDislinktRequest.job:type_name -> post.Job
+	14, // 3: post.SearchJobsByPositionResponse.jobs:type_name -> post.Job
+	14, // 4: post.PostJobRequest.job:type_name -> post.Job
+	14, // 5: post.GetAllJobsResponse.jobs:type_name -> post.Job
+	0,  // 6: post.Job.seniority:type_name -> post.Job.Seniority
+	30, // 7: post.Job.closingDate:type_name -> google.protobuf.Timestamp
+	15, // 8: post.GetResponse.post:type_name -> post.PostM
+	15, // 9: post.GetAllResponse.posts:type_name -> post.PostM
+	15, // 10: post.PostRequest.post:type_name -> post.PostM
+	15, // 11: post.PostResponse.post:type_name -> post.PostM
+	16, // 12: post.ReactionRequest.reaction:type_name -> post.PostReaction
+	16, // 13: post.ReactionResponse.postReaction:type_name -> post.PostReaction
+	17, // 14: post.CommentRequest.comment:type_name -> post.Comment
+	17, // 15: post.CommentResponse.comment:type_name -> post.Comment
+	16, // 16: post.AllReactionsResponse.reactions:type_name -> post.PostReaction
+	17, // 17: post.AllCommentsResponse.comments:type_name -> post.Comment
+	18, // 18: post.PostService.Get:input_type -> post.GetRequest
+	20, // 19: post.PostService.GetAll:input_type -> post.GetAllRequest
+	15, // 20: post.PostService.Post:input_type -> post.PostM
+	18, // 21: post.PostService.GetByUser:input_type -> post.GetRequest
+	24, // 22: post.PostService.LikePost:input_type -> post.ReactionRequest
+	24, // 23: post.PostService.DislikePost:input_type -> post.ReactionRequest
+	26, // 24: post.PostService.CommentPost:input_type -> post.CommentRequest
+	18, // 25: post.PostService.GetAllReactionsByPost:input_type -> post.GetRequest
+	18, // 26: post.PostService.GetAllCommentsByPost:input_type -> post.GetRequest
+	18, // 27: post.PostService.GetFeed:input_type -> post.GetRequest
+	9,  // 28: post.PostService.PostJob:input_type -> post.PostJobRequest
+	12, // 29: post.PostService.GetAllJobs:input_type -> post.GetAllJobsRequest
+	10, // 30: post.PostService.RegisterApiKey:input_type -> post.GetApiKeyRequest
+	7,  // 31: post.PostService.SearchJobsByPosition:input_type -> post.SearchJobsByPositionRequest
+	6,  // 32: post.PostService.PostJobDislinkt:input_type -> post.PostJobDislinktRequest
+	4,  // 33: post.PostService.SuggestJob:input_type -> post.SuggestJobRequest
+	1,  // 34: post.PostService.GetSuggestJobsFor:input_type -> post.GetSuggestJobsForRequest
+	19, // 35: post.PostService.Get:output_type -> post.GetResponse
+	21, // 36: post.PostService.GetAll:output_type -> post.GetAllResponse
+	15, // 37: post.PostService.Post:output_type -> post.PostM
+	21, // 38: post.PostService.GetByUser:output_type -> post.GetAllResponse
+	25, // 39: post.PostService.LikePost:output_type -> post.ReactionResponse
+	25, // 40: post.PostService.DislikePost:output_type -> post.ReactionResponse
+	27, // 41: post.PostService.CommentPost:output_type -> post.CommentResponse
+	28, // 42: post.PostService.GetAllReactionsByPost:output_type -> post.AllReactionsResponse
+	29, // 43: post.PostService.GetAllCommentsByPost:output_type -> post.AllCommentsResponse
+	21, // 44: post.PostService.GetFeed:output_type -> post.GetAllResponse
+	14, // 45: post.PostService.PostJob:output_type -> post.Job
+	13, // 46: post.PostService.GetAllJobs:output_type -> post.GetAllJobsResponse
+	11, // 47: post.PostService.RegisterApiKey:output_type -> post.GetApiKeyResponse
+	8,  // 48: post.PostService.SearchJobsByPosition:output_type -> post.SearchJobsByPositionResponse
+	14, // 49: post.PostService.PostJobDislinkt:output_type -> post.Job
+	5,  // 50: post.PostService.SuggestJob:output_type -> post.SuggestJobResponse
+	2,  // 51: post.PostService.GetSuggestJobsFor:output_type -> post.GetSuggestJobsForResponse
+	35, // [35:52] is the sub-list for method output_type
+	18, // [18:35] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_post_service_proto_init() }
@@ -1851,7 +1965,7 @@ func file_post_service_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_post_service_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*JobPosition); i {
+			switch v := v.(*GetSuggestJobsForRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1863,7 +1977,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SuggestJobRequest); i {
+			switch v := v.(*GetSuggestJobsForResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1875,7 +1989,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SuggestJobResponse); i {
+			switch v := v.(*JobPosition); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1887,7 +2001,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostJobDislinktRequest); i {
+			switch v := v.(*SuggestJobRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1899,7 +2013,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SearchJobsByPositionRequest); i {
+			switch v := v.(*SuggestJobResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1911,7 +2025,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SearchJobsByPositionResponse); i {
+			switch v := v.(*PostJobDislinktRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1923,7 +2037,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostJobRequest); i {
+			switch v := v.(*SearchJobsByPositionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1935,7 +2049,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetApiKeyRequest); i {
+			switch v := v.(*SearchJobsByPositionResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1947,7 +2061,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetApiKeyResponse); i {
+			switch v := v.(*PostJobRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1959,7 +2073,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetAllJobsRequest); i {
+			switch v := v.(*GetApiKeyRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1971,7 +2085,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetAllJobsResponse); i {
+			switch v := v.(*GetApiKeyResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1983,7 +2097,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Job); i {
+			switch v := v.(*GetAllJobsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1995,7 +2109,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostM); i {
+			switch v := v.(*GetAllJobsResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2007,7 +2121,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostReaction); i {
+			switch v := v.(*Job); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2019,7 +2133,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Comment); i {
+			switch v := v.(*PostM); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2031,7 +2145,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetRequest); i {
+			switch v := v.(*PostReaction); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2043,7 +2157,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetResponse); i {
+			switch v := v.(*Comment); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2055,7 +2169,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetAllRequest); i {
+			switch v := v.(*GetRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2067,7 +2181,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetAllResponse); i {
+			switch v := v.(*GetResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2079,7 +2193,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostRequest); i {
+			switch v := v.(*GetAllRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2091,7 +2205,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostResponse); i {
+			switch v := v.(*GetAllResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2103,7 +2217,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReactionRequest); i {
+			switch v := v.(*PostRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2115,7 +2229,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReactionResponse); i {
+			switch v := v.(*PostResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2127,7 +2241,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CommentRequest); i {
+			switch v := v.(*ReactionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2139,7 +2253,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CommentResponse); i {
+			switch v := v.(*ReactionResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2151,7 +2265,7 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AllReactionsResponse); i {
+			switch v := v.(*CommentRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2163,6 +2277,30 @@ func file_post_service_proto_init() {
 			}
 		}
 		file_post_service_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CommentResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_post_service_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AllReactionsResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_post_service_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AllCommentsResponse); i {
 			case 0:
 				return &v.state
@@ -2181,7 +2319,7 @@ func file_post_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_post_service_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   27,
+			NumMessages:   29,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
