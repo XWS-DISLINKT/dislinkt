@@ -10,3 +10,8 @@ providers:
     type: file
     options:
       path: /var/lib/grafana/dashboards/cadvisor
+
+  - name: Custom Metrics
+    type: file
+    options:
+      path: /var/lib/grafana/dashboards/custom_metrics
