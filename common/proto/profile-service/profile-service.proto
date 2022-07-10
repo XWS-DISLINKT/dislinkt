@@ -184,6 +184,7 @@ message Profile {
   bool ReceivesConnectionNotifications = 17;
   bool ReceivesPostNotifications = 18;
   bool ReceivesMessageNotifications = 19;
+  bool isAdmin = 20;
 }
 
 message Education {
